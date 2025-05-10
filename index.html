@@ -11,16 +11,26 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <nav class="nav-left">
-      <a href="#">INICIO</a>
-      <a href="#">PROGRAMACIÓN</a>
-    </nav>
     <div class="logo">RADIO DJ 101.5</div>
-    <nav class="nav-right">
-      <a href="#">NOTICIAS</a>
-      <a href="#">CONTACTO</a>
-    </nav>
-  </header>
+  
+    <!-- 1a. Burger toggle button -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
+      &#9776;
+    </button>
+  
+    <!-- 1b. Wrap both navs -->
+    <div class="nav-menu">
+      <nav class="nav-left">
+        <a href="index.html">INICIO</a>
+        <a href="nosotros.html">NOSOTROS</a>
+        <a href="#">PROGRAMACIÓN</a>
+      </nav>
+      <nav class="nav-right">
+        <a href="#">NOTICIAS</a>
+        <a href="contacto.html">CONTACTO</a>
+      </nav>
+    </div>
+  </header>  
 
   <!-- MAIN LAYOUT -->
   <div class="layout">
@@ -112,6 +122,15 @@
     </aside>
 
   </div>
-
+  <script>
+    document
+      .getElementById('menu-toggle')
+      .addEventListener('click', () => {
+        document
+          .querySelector('.nav-menu')
+          .classList.toggle('open');
+      });
+  </script>
+  
 </body>
 </html>

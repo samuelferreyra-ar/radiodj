@@ -168,4 +168,102 @@
     .sidebar { display: none; }
     .news-cards { flex-direction: column; }
   }
+/* --- hide burger by default, show normal nav --- */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--light);
+    cursor: pointer;
+  }
   
+  /* wrap navs side-by-side on desktop */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* MOBILE: <=768px */
+  @media (max-width: 768px) {
+    /* show burger */
+    .menu-toggle {
+      display: block;
+      position: absolute;
+      top: 1rem;
+      right: 2%;
+    }
+  
+    /* hide the navs until open */
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--red);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      padding: 1rem 0;
+    }
+    .nav-menu a {
+      display: block;
+      padding: 0.5rem 2%;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+  
+    /* when open, show it */
+    .nav-menu.open {
+      display: flex;
+    }
+  }
+/* CONTACT FORM */
+.contact-form {
+  text-align: center; /* Centra el título */
+  padding: 2rem 1rem;
+}
+
+.contact-form h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;     /* ancho máximo para el formulario */
+  margin: 0 auto;       /* centra el formulario */
+  gap: 1rem;            /* separación uniforme entre campos */
+}
+
+.contact-form label {
+  text-align: left;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-family: var(--font);
+}
+
+.contact-form button {
+  align-self: center;      /* centra el botón dentro del form */
+  padding: 0.75rem 1.5rem;
+  background: var(--red);
+  color: var(--light);
+  border: none;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: darken(var(--red), 10%);
+}
+    
