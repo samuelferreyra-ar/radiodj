@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="google-site-verification" content="qSXsKJVIJjCObNcBVCWUSrp3SMfoviqsrQ8N8I31FoY" />
   <title>Radio DJ 101.5</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -122,6 +121,22 @@
       </div>
     </aside>
 
+    <div id="tos-bar" class="tos-bar">
+  <p>Al continuar navegando aceptás nuestros 
+    <a href="#" id="open-tos-modal">Términos y Condiciones</a>.
+  </p>
+  <button id="accept-tos">Aceptar</button>
+</div>
+
+<!-- TOS Modal -->
+<div id="tos-modal" class="tos-modal">
+  <div class="tos-modal-content">
+    <span id="close-tos-modal" class="close-button">&times;</span>
+    <h2>Términos y Condiciones</h2>
+    <p>Aquí van los términos y condiciones de uso del sitio web. Puedes personalizar este texto según tus necesidades.</p>
+  </div>
+</div>
+
   </div>
   <script>
     document
@@ -132,6 +147,36 @@
           .classList.toggle('open');
       });
   </script>
-  
+  <script>
+  // Show/hide TOS bar
+  if (!localStorage.getItem('tosAccepted')) {
+    document.getElementById('tos-bar').style.display = 'flex';
+  }
+
+  document.getElementById('accept-tos').addEventListener('click', () => {
+    localStorage.setItem('tosAccepted', 'true');
+    document.getElementById('tos-bar').style.display = 'none';
+  });
+
+  // Show TOS modal
+  document.getElementById('open-tos-modal').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('tos-modal').style.display = 'block';
+  });
+
+  // Close TOS modal
+  document.getElementById('close-tos-modal').addEventListener('click', () => {
+    document.getElementById('tos-modal').style.display = 'none';
+  });
+
+  // Close modal if clicking outside the modal content
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById('tos-modal');
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
