@@ -4,46 +4,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Radio DJ 101.5</title>
+
+  <!-- Título SEO -->
+  <title>Radio DJ 101.5 | Escuchá en Vivo Online y por FM en Argentina</title>
+
+  <!-- Meta Description SEO -->
+  <meta name="description" content="Escuchá Radio DJ 101.5 en vivo online o por FM. La mejor música, DJs en directo, noticias locales y entretenimiento desde Argentina. ¡Sintonizá ahora!">
+
+  <!-- Meta Keywords (opcional) -->
+  <meta name="keywords" content="radio dj 101.5, escuchar radio dj, radio online argentina, radio en vivo, radio fm argentina, radio dj 101.5 en vivo, radio dj online, radio argentina música, emisora online">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://samuelferreyra-ar.github.io/radiodj/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo-favicon.png" type="image/png">
+
+  <!-- Hoja de estilo -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Aquí el bloque JSON-LD -->
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RadioStation",
+  "name": "Radio DJ 101.5",
+  "url": "https://samuelferreyra-ar.github.io/radiodj/",
+  "logo": "",
+  "broadcastFrequency": "101.5 FM",
+  "broadcastArea": "Argentina"
+}
+</script>
+
 </head>
+
 <body>
 
   <!-- HEADER -->
-  <header class="site-header">
-    <div class="logo">RADIO DJ 101.5</div>
-  
-    <!-- 1a. Burger toggle button -->
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
-      &#9776;
-    </button>
-  
-    <!-- 1b. Wrap both navs -->
-    <div class="nav-menu">
-      <nav class="nav-left">
-        <a href="index.html">INICIO</a>
-        <a href="nosotros.html">NOSOTROS</a>
-        <a href="#">PROGRAMACIÓN</a>
-      </nav>
-      <nav class="nav-right">
-        <a href="#">NOTICIAS</a>
-        <a href="contacto.html">CONTACTO</a>
-      </nav>
-    </div>
-  </header>  
+  <div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
 
   <!-- MAIN LAYOUT -->
   <div class="layout">
 
     <!-- LEFT SIDEBAR ADS -->
-    <aside class="sidebar sidebar--left">
-      <div class="ad-vertical">
-        <img src="assets/ad_fravega.webp" alt="Electro Fest">
-      </div>
-      <div class="ad-vertical">
-        <img src="assets/ad_hyatt.webp" alt="Vacaciones">
-      </div>
-    </aside>
+    <div id="sidebar-left"></div>
+<script>
+  fetch('sidebar-left.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('sidebar-left').innerHTML = data;
+    });
+</script>
+
 
     <!-- CENTER CONTENT -->
     <main class="content">
@@ -104,22 +124,33 @@
         </div>
       </section>
 
-      <!-- BOTTOM BANNER AD -->
-      <div class="ad-banner">
-        <img src="assets/ad_united24.webp" alt="United24 Media">
-      </div>
-
     </main>
-
+      
     <!-- RIGHT SIDEBAR ADS -->
-    <aside class="sidebar sidebar--right">
-      <div class="ad-vertical">
-        <img src="assets/ad_starlink.webp" alt="Starlink">
-      </div>
-      <div class="ad-vertical">
-        <img src="assets/ad_adobe.webp" alt="Adobe Creative Cloud">
-      </div>
-    </aside>
+    <div id="sidebar-right"></div>
+<script>
+  fetch('sidebar-right.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('sidebar-right').innerHTML = data;
+    });
+</script>
+
+<!-- BOTTOM BANNER -->
+<div class="ad-banner" style="grid-column: 1 / span 3;">
+  <img src="assets/ad_united24.webp" alt="United24 Media">
+</div>
+</div>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
 
     <div id="tos-bar" class="tos-bar">
   <p>Al continuar navegando aceptás nuestros 
@@ -173,7 +204,8 @@
 <p>Si tenés dudas o consultas sobre estos Términos y Condiciones, podés contactarnos a través de nuestro formulario de contacto o al correo electrónico <a href="mailto:contacto@radiodj1015.com">contacto@radiodj1015.com</a>.</p>
 
   </div>
-</div>
+
+
 
   </div>
   <script>

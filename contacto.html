@@ -8,33 +8,25 @@
 </head>
 <body>
   <!-- HEADER -->
-  <header class="site-header">
-    <div class="logo">RADIO DJ 101.5</div>
-    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
-      &#9776;
-    </button>
-    <div class="nav-menu">
-      <nav class="nav-left">
-        <a href="index.html">INICIO</a>
-        <a href="nosotros.html">NOSOTROS</a>
-        <a href="#">PROGRAMACIÓN</a>
-      </nav>
-      <nav class="nav-right">
-        <a href="#">NOTICIAS</a>
-        <a href="contacto.html">CONTACTO</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header"></div>
+    <script>
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+    </script>
+
 
   <div class="layout">
-    <aside class="sidebar sidebar--left">
-      <div class="ad-vertical">
-        <img src="assets/ad_fravega.webp" alt="Electro Fest">
-      </div>
-      <div class="ad-vertical">
-        <img src="assets/ad_hyatt.webp" alt="Vacaciones">
-      </div>
-    </aside>
+    <div id="sidebar-left"></div>
+      <script>
+        fetch('sidebar-left.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('sidebar-left').innerHTML = data;
+          });
+      </script>
 
     <main class="content">
       <section class="contact-form">
@@ -52,21 +44,33 @@
           <button type="submit">Enviar</button>
         </form>
       </section>
+      </main>
+    <div id="sidebar-right"></div>
+      <script>
+        fetch('sidebar-right.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('sidebar-right').innerHTML = data;
+          });
+      </script>
 
-      <div class="ad-banner">
+      <!-- BOTTOM BANNER -->
+      <div class="ad-banner" style="grid-column: 1 / span 3;">
         <img src="assets/ad_united24.webp" alt="United24 Media">
       </div>
-    </main>
 
-    <aside class="sidebar sidebar--right">
-      <div class="ad-vertical">
-        <img src="assets/ad_starlink.webp" alt="Starlink">
-      </div>
-      <div class="ad-vertical">
-        <img src="assets/ad_adobe.webp" alt="Adobe Creative Cloud">
-      </div>
-    </aside>
   </div>
+<!-- FOOTER -->
+<div id="footer"></div>
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
+
+  
 
   <script>
     document.getElementById('menu-toggle').addEventListener('click', () => {

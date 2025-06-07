@@ -32,24 +32,31 @@
   }
   
   /* 3. LAYOUT GRID */
-  .layout {
+.layout {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr auto; /* first row fills, second row is banner */
     gap: 1rem;
     padding: 1rem 2%;
-  }
+    align-items: start;
+}
+
+
   
   /* 4. SIDEBARS */
   .sidebar {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center; /* center banners */
+    max-width: 220px;    /* or 200px, adjust as you like */
   }
   .ad-vertical img {
     width: 100%;
+    height: auto;
     display: block;
-    border-radius: 0.5rem;
-  }
+}
+
   
   /* 5. HERO */
   .hero {
@@ -333,4 +340,61 @@
   top: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
+}
+.site-footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #b30000;
+  color: white;
+  padding: 20px 10px;
+}
+
+.site-footer .footer-columns {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;  /* Optional, to keep it neat on big screens */
+  margin: 0 auto;
+}
+
+.site-footer .footer-columns div {
+  flex: 1;
+  min-width: 250px;
+  margin: 10px;
+}
+
+.site-footer h3 {
+  margin-top: 0;
+}
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.site-footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.site-footer a:hover {
+  text-decoration: none;
+}
+
+.site-footer iframe {
+  width: 100%;
+  height: 150px;
+  border: none;
+}
+
+.site-footer .copyright {
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  margin-top: 10px;
+}
+footer{
+  width: 100%;
+box-sizing: border-box;
+
 }
