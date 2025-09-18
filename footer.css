@@ -1,0 +1,56 @@
+/* css/footer.css */
+
+/* Contenedor interno (grid) */
+#radio-footer .footer-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 24px;
+}
+
+/* Botón “en vivo” del footer */
+#radio-footer .btn-live{
+  background: var(--red, #d83c40);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Badges de stores */
+#radio-footer .badges{
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+#radio-footer .badge1{
+  display: inline-flex; align-items: center; gap: 6px;
+  background-color: black; color:#fff;
+  border-radius: 8px; padding: 8px 10px; font-size: .82rem;
+}
+#radio-footer .badge2{
+  display: inline-flex; align-items: center; gap: 6px;
+  background-color: green; color:#fff;
+  border-radius: 8px; padding: 8px 10px; font-size: .82rem;
+}
+
+/* Franja de copyright */
+#radio-footer .copyright{
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.2);
+  padding: 14px 0;
+  margin-top: 20px;
+  font-size: .85rem;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  #radio-footer .footer-inner{ grid-template-columns: 1fr; }
+}

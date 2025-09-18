@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RADIO DJ 101.5 - Programación</title>
+  <style>
+    :root{
+      --red:#d83c40;
+      --navy:#1e3550;
+      --bg:#f2f4f7;
+      --text:#1a1f29;
+      --muted:#6b7789;
+      --radius:12px;
+      --shadow:0 8px 20px rgba(0,0,0,.2);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+
+    /* Header */
+    .topbar{background:var(--red);color:#fff;padding:14px 24px;position:sticky;top:0;z-index:50}
+    .topbar .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800}
+    nav ul{display:flex;gap:20px;list-style:none}
+    nav a{font-weight:600;opacity:.95}
+    nav a:hover{text-decoration:underline;opacity:1}
+
+    /* Layout */
+    .frame{max-width:1100px;margin:0 auto;position:relative;padding:32px 24px}
+    .side-banner{position:absolute;top:64px;bottom:0;width:38px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:8px}
+    .side-banner.left{left:-48px}
+    .side-banner.right{right:-48px}
+    .side-banner span{writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:2px;font-weight:800}
+
+    /* Card principal programación */
+    .program-card{background:#fff;box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden}
+    .program-header{background:var(--red);color:#fff;padding:14px 20px;font-weight:800;font-size:1.2rem;text-align:center}
+    .program-body{display:grid;grid-template-columns:1fr 2fr;gap:24px;padding:20px}
+    .program-image{background:#e5e8ee;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:160px}
+    .program-table{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:.95rem}
+    th,td{padding:10px 12px;text-align:left}
+    th{background:var(--navy);color:#fff}
+    tr:nth-child(even){background:#f6f8fa}
+    .buttons{margin-top:18px;display:flex;gap:14px}
+    .btn{padding:10px 16px;border-radius:20px;font-weight:700;cursor:pointer;border:none}
+    .btn.primary{background:var(--navy);color:#fff}
+    .btn.secondary{background:var(--red);color:#fff}
+
+    /* Footer */
+    footer{background:var(--navy);color:#e7edf6;margin-top:40px}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+    footer h4{margin-bottom:12px;color:#fff}
+    .links{display:grid;gap:8px}
+    .btn-live{background:#ef4452;color:#fff;font-weight:700;border:none;border-radius:999px;padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+    .badges{display:flex;gap:8px;margin-top:10px}
+    .badge1{display:inline-flex; align-items:center; gap:6px; background-color: black; border-radius:8px; padding:8px 10px; font-size:.82rem}
+    .badge2{display:inline-flex; align-items:center; gap:6px; background-color: green; border-radius:8px; padding:8px 10px; font-size:.82rem}
+    .copyright{text-align:center;border-top:1px solid rgba(255,255,255,.2);padding:14px 0;margin-top:20px;font-size:.85rem}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .program-body{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .side-banner{display:none}
+    }
+  </style>
+</head>
+<body>
+  <site-header></site-header>
+
+  <div class="frame">
+    <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
+    <aside class="side-banner right"><span>PUBLICIDAD</span></aside>
+
+    <section class="program-card">
+      <div class="program-header">PROGRAMACIÓN SEMANAL</div>
+      <div class="program-body">
+        <div class="program-image" aria-hidden="true">
+          <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="80" rx="10" fill="#cfd6df"/>
+            <circle cx="40" cy="40" r="18" fill="#b8c1cc"/>
+            <rect x="68" y="24" width="36" height="12" rx="4" fill="#b8c1cc"/>
+            <rect x="68" y="44" width="28" height="10" rx="3" fill="#b8c1cc"/>
+          </svg>
+        </div>
+        <div>
+          <div class="program-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Día</th>
+                  <th>Hora</th>
+                  <th>Nombre del Programa</th>
+                  <th>Presentador</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Lunes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
+                <tr><td>Lunes</td><td>9:00 - 12:00</td><td><b>Top 40 Countdown</b></td><td>Miguel Reyes</td></tr>
+                <tr><td>Lunes</td><td>12:00 - 15:00</td><td><b>Descanso para Almorzar</b></td><td>Luisa Chen</td></tr>
+                <tr><td>Martes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
+                <tr><td>Martes</td><td>9:00 - 12:00</td><td><b>Hora del Rock Clásico</b></td><td>Jaime Wilson</td></tr>
+                <tr><td>Miércoles</td><td>19:00 - 22:00</td><td><b>Noche de Jazz</b></td><td>Roberto Díaz</td></tr>
+                <tr><td>Jueves</td><td>20:00 - 23:00</td><td><b>Jueves de Nostalgia</b></td><td>Emma Torres</td></tr>
+                <tr><td>Viernes</td><td>21:00 - 00:00</td><td><b>Fiesta de Viernes</b></td><td>DJ Maxwell</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="buttons">
+            <button class="btn primary">Descargar Horario</button>
+            <button class="btn secondary">Escuchar En Vivo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <site-footer></site-footer>
+
+<script type="module" src="js/componentes.js"></script>
+
+</body>
+</html>

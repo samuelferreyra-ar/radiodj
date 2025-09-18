@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mi Cuenta - RADIO DJ 101.5</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Estilos locales para las pestañas y paneles (respeta tu paleta) ===== */
+  .account-wrap{max-width:1100px;margin:24px auto;padding:0 24px 48px}
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+  .tab-btn{
+    background:var(--card); border:1px solid rgba(0,0,0,.08);
+    padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:800;
+  }
+  .tab-btn[aria-selected="true"]{ background:#fff; box-shadow:var(--shadow); }
+  .panel{display:none; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+  .panel.active{display:block}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  .grid6{display:grid; grid-template-columns:repeat(6,1fr); gap:8px}
+  .field{display:flex; flex-direction:column; gap:6px}
+  .field input, .field select, .field textarea{
+    padding:10px 12px; border-radius:10px; border:1px solid #ccc; outline:none;
+  }
+  .btn{
+    background:var(--red); color:#fff; border:none; border-radius:10px; padding:10px 14px;
+    font-weight:800; cursor:pointer;
+  }
+  .btn:hover{ background:var(--red-dark); }
+  .muted{color:var(--muted)}
+  .table{width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden}
+  .table th, .table td{padding:10px 12px; border-bottom:1px solid #e5e9ef; font-size:.92rem}
+  .table th{text-align:left; background:#f7f9fc; font-weight:800}
+  .row-actions{display:flex; gap:8px}
+  .danger{background:#9b2226}
+  .danger:hover{background:#7e1c1f}
+  @media (max-width:900px){ .grid2{grid-template-columns:1fr} .grid3{grid-template-columns:1fr} .grid6{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">RADIO DJ 101.5</div>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="index.html#programacion">PROGRAMACIÓN</a></li>
+        <li><a href="index.html#noticias">NOTICIAS</a></li>
+        <li><a href="index.html#contacto">CONTACTO</a></li>
+        <li><a href="cuenta.html" class="account-btn">CUENTA</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="account-wrap">
+  <h1>Mi cuenta</h1>
+  <p class="muted" id="whoami">Cargando usuario…</p>
+
+  <!-- Tabs -->
+  <div class="tabs" role="tablist" aria-label="Secciones de cuenta">
+    <button class="tab-btn" role="tab" aria-controls="panel-datos" aria-selected="true" id="tab-datos">Datos</button>
+    <button class="tab-btn" role="tab" aria-controls="panel-programacion" aria-selected="false" id="tab-programacion" hidden>Programación</button>
+    <button class="tab-btn" role="tab" aria-controls="panel-usuarios" aria-selected="false" id="tab-usuarios" hidden>Gestión de usuarios</button>
+    <button class="tab-btn" role="tab" aria-controls="panel-notas" aria-selected="false" id="tab-notas" hidden>Notas</button>
+    <div class="text-center mt-4">
+      <button id="btn-logout" class="btn btn-danger">
+        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Panel: Datos -->
+  <section class="panel active" id="panel-datos" role="tabpanel" aria-labelledby="tab-datos">
+    <h2>Datos personales</h2>
+    <div class="grid2">
+      <div class="field">
+        <label>Nombre a mostrar</label>
+        <input id="inpDisplayName" type="text" placeholder="Nombre y Apellido">
+        <button class="btn" id="btnSaveDisplayName">Guardar nombre</button>
+      </div>
+      <div class="field">
+        <label>Usuario (solo letras y números)</label>
+        <input id="inpUsername" type="text" placeholder="usuarioamigable">
+        <button class="btn" id="btnSaveUsername">Guardar usuario</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:18px">Cambiar email</h3>
+    <div class="grid2">
+      <div class="field">
+        <label>Nuevo email</label>
+        <input id="inpNewEmail" type="email" placeholder="nuevo@correo.com">
+      </div>
+      <div class="field">
+        <label>Tu contraseña (para reautenticación)</label>
+        <input id="inpCurrentPassForEmail" type="password" placeholder="••••••••">
+      </div>
+    </div>
+    <button class="btn" id="btnChangeEmail">Actualizar email</button>
+
+    <h3 style="margin-top:18px">Cambiar contraseña</h3>
+    <div class="grid2">
+      <div class="field">
+        <label>Contraseña actual</label>
+        <input id="inpCurrentPass" type="password" placeholder="••••••••">
+      </div>
+      <div class="field">
+        <label>Nueva contraseña</label>
+        <input id="inpNewPass" type="password" placeholder="••••••••">
+      </div>
+    </div>
+    <button class="btn" id="btnChangePass">Actualizar contraseña</button>
+
+    <div id="deleteBox" style="margin-top:22px; display:none;">
+      <h3>Eliminar cuenta</h3>
+      <p class="muted">Esta acción es permanente. Se borrará tu usuario y tus datos básicos.</p>
+      <div class="grid2">
+        <div class="field">
+          <label>Confirma tu contraseña</label>
+          <input id="inpDeletePass" type="password" placeholder="••••••••">
+        </div>
+        <div class="field" style="align-self:end">
+          <button class="btn danger" id="btnDeleteAccount">Eliminar mi cuenta</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panel: Programación (solo Admin) -->
+  <section class="panel" id="panel-programacion" role="tabpanel" aria-labelledby="tab-programacion">
+    <h2>Programación del día</h2>
+    <div class="grid2">
+      <div class="field">
+        <label>Fecha</label>
+        <input id="progDate" type="date">
+      </div>
+      <div class="field" style="align-self:end">
+        <div class="row-actions">
+          <button class="btn" id="btnLoadProg">Cargar</button>
+          <button class="btn" id="btnSaveProg">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid6" style="margin-top:12px; font-weight:800">
+      <div>Inicio</div><div>Fin</div><div>Programa</div><div>Conductor</div><div>Invitados</div><div>#</div>
+    </div>
+    <div id="progRows"></div>
+  </section>
+
+  <!-- Panel: Gestión de usuarios (solo Admin) -->
+  <section class="panel" id="panel-usuarios" role="tabpanel" aria-labelledby="tab-usuarios">
+    <h2>Gestión de usuarios</h2>
+    <div class="grid3">
+      <div class="field">
+        <label>Rol</label>
+        <select id="fltRole">
+          <option value="">Todos</option>
+          <option value="admin">Admin</option>
+          <option value="periodista">Periodista</option>
+          <option value="espectador">Espectador</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Registrados desde</label>
+        <input id="fltFrom" type="date">
+      </div>
+      <div class="field">
+        <label>Registrados hasta</label>
+        <input id="fltTo" type="date">
+      </div>
+    </div>
+    <div class="row-actions" style="margin:12px 0">
+      <button class="btn" id="btnApplyUsers">Aplicar filtros</button>
+      <button class="btn" id="btnResetUsers">Limpiar</button>
+    </div>
+
+    <table class="table" aria-label="Usuarios registrados">
+      <thead>
+        <tr><th>Nombre</th><th>Email</th><th>Usuario</th><th>Rol</th><th>Registrado</th><th>Acciones</th></tr>
+      </thead>
+      <tbody id="usersTbody"></tbody>
+    </table>
+  </section>
+
+  <!-- Panel: Notas (solo Periodista) -->
+  <section class="panel" id="panel-notas" role="tabpanel" aria-labelledby="tab-notas">
+    <h2>Notas periodísticas</h2>
+    <div class="grid2">
+      <div>
+        <h3>Mis notas</h3>
+        <ul id="listaNotas"></ul>
+      </div>
+      <div>
+        <h3>Editor</h3>
+        <div class="field">
+          <label>Título</label>
+          <input id="notaTitulo" type="text" placeholder="Titular de la nota">
+        </div>
+        <div class="field">
+          <label>Contenido</label>
+          <textarea id="notaCuerpo" rows="8" placeholder="Escribe aquí (admite HTML simple/Markdown)"></textarea>
+        </div>
+        <div class="field">
+          <label>Estado</label>
+          <select id="notaEstado">
+            <option value="borrador">Borrador</option>
+            <option value="publicada">Publicada</option>
+          </select>
+        </div>
+        <div class="row-actions" style="margin-top:8px">
+          <button class="btn" id="btnNuevaNota">Nueva</button>
+          <button class="btn" id="btnGuardarNota">Guardar</button>
+          <button class="btn danger" id="btnBorrarNota">Borrar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="module">
+  import { app, auth, db, observeAuth } from "./js/firebase.js"; // tu inicialización Firebase
+  import {
+    updateProfile, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider, deleteUser, getAuth, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import {
+    doc, getDoc, setDoc, updateDoc, collection, addDoc, deleteDoc,
+    getDocs, query, where, orderBy, serverTimestamp, Timestamp, onSnapshot, limit
+  } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+  // ===== Utilidades =====
+  const $ = (sel)=>document.querySelector(sel);
+  const $$ = (sel)=>document.querySelectorAll(sel);
+  const todayStr = ()=> new Date().toISOString().slice(0,10);
+  const toTS = (d)=> Timestamp.fromDate(new Date(d+"T00:00:00"));
+
+  function toast(msg){ alert(msg); } // reemplazable por UI linda
+
+  function setTabs(role){
+    // Mostrar/ocultar tabs según rol
+    const tProg = $("#tab-programacion");
+    const tUsers = $("#tab-usuarios");
+    const tNotas = $("#tab-notas");
+    tProg.hidden = tUsers.hidden = tNotas.hidden = true;
+
+    if(role === "admin"){
+      tProg.hidden = false;
+      tUsers.hidden = false;
+    }
+    if(role === "periodista"){
+      tNotas.hidden = false;
+    }
+    // Espectador solo ve "Datos" (y botón eliminar cuenta)
+    $("#deleteBox").style.display = (role === "espectador") ? "block" : "none";
+  }
+
+  function initTabs(){
+    $$(".tab-btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        $$(".tab-btn").forEach(b=>b.setAttribute("aria-selected","false"));
+        btn.setAttribute("aria-selected","true");
+        const id = btn.getAttribute("aria-controls");
+        $$(".panel").forEach(p=>p.classList.remove("active"));
+        $("#"+id).classList.add("active");
+      });
+    });
+  }
+
+  // ===== Estado global =====
+  let currentUser = null;
+  let currentRole = "espectador"; // default
+  let currentNoteId = null;       // editor de notas
+
+  observeAuth(async (user)=>{
+    if(!user){ window.location.href = "login.html"; return; }
+    currentUser = user;
+    $("#whoami").textContent = `${user.displayName || "Usuario"} · ${user.email}`;
+
+    // Garantizar doc de usuario con role
+    const uref = doc(db, "users", user.uid);
+    const usnap = await getDoc(uref);
+    if(!usnap.exists()){
+      await setDoc(uref,{
+        uid:user.uid, email:user.email, displayName:user.displayName || "Usuario",
+        username:(user.displayName || "usuario").toLowerCase().replace(/[^\w]+/g,"").slice(0,20),
+        role:"espectador",
+        createdAt: serverTimestamp()
+      });
+      currentRole = "espectador";
+    } else {
+      currentRole = usnap.data().role || "espectador";
+    }
+
+    // Pintar valores iniciales en "Datos"
+    $("#inpDisplayName").value = user.displayName || "";
+    $("#inpUsername").value = (usnap.data() && (usnap.data().username||"")) || "";
+
+    // Activar tabs según rol
+    setTabs(currentRole);
+    initTabs();
+
+    // Programación (admin)
+    if(currentRole === "admin"){
+      initProgramacion();
+      initGestionUsuarios();
+    }
+
+    // Notas (periodista)
+    if(currentRole === "periodista"){
+      initNotas();
+    }
+  });
+
+  // ====== DATOS (perfil) ======
+  $("#btnSaveDisplayName").addEventListener("click", async ()=>{
+    const name = $("#inpDisplayName").value.trim();
+    if(!name) return toast("Escribe un nombre");
+    await updateProfile(currentUser, { displayName:name });
+    await updateDoc(doc(db,"users",currentUser.uid), { displayName:name });
+    toast("Nombre actualizado");
+    $("#whoami").textContent = `${name} · ${currentUser.email}`;
+  });
+
+  $("#btnSaveUsername").addEventListener("click", async ()=>{
+    const username = $("#inpUsername").value.trim().toLowerCase().replace(/[^\w]+/g,"").slice(1,20) || null;
+    if(!username) return toast("Usuario inválido");
+    await updateDoc(doc(db,"users",currentUser.uid), { username });
+    toast("Usuario actualizado");
+  });
+
+  // Cambiar email (requiere reautenticación)
+  $("#btnChangeEmail").addEventListener("click", async ()=>{
+    const newEmail = $("#inpNewEmail").value.trim();
+    const pass = $("#inpCurrentPassForEmail").value;
+    if(!newEmail || !pass) return toast("Completá nuevo email y tu contraseña");
+    try{
+      const cred = EmailAuthProvider.credential(currentUser.email, pass);
+      await reauthenticateWithCredential(currentUser, cred);
+      await updateEmail(currentUser, newEmail);
+      await updateDoc(doc(db,"users",currentUser.uid), { email:newEmail });
+      toast("Email actualizado");
+    }catch(err){ toast(err.message || "No se pudo actualizar el email"); }
+  });
+
+  // Cambiar contraseña (requiere reautenticación)
+  $("#btnChangePass").addEventListener("click", async ()=>{
+    const oldp = $("#inpCurrentPass").value;
+    const newp = $("#inpNewPass").value;
+    if(!oldp || !newp) return toast("Completá ambas contraseñas");
+    try{
+      const cred = EmailAuthProvider.credential(currentUser.email, oldp);
+      await reauthenticateWithCredential(currentUser, cred);
+      await updatePassword(currentUser, newp);
+      toast("Contraseña actualizada");
+    }catch(err){ toast(err.message || "No se pudo actualizar la contraseña"); }
+  });
+
+  // Eliminar cuenta (solo espectador, por UI)
+  $("#btnDeleteAccount").addEventListener("click", async ()=>{
+    const pass = $("#inpDeletePass").value;
+    if(!pass) return toast("Confirmá tu contraseña");
+    if(!confirm("¿Seguro que querés eliminar tu cuenta?")) return;
+    try{
+      const cred = EmailAuthProvider.credential(currentUser.email, pass);
+      await reauthenticateWithCredential(currentUser, cred);
+      await deleteDoc(doc(db,"users",currentUser.uid));
+      await deleteUser(currentUser);
+      alert("Cuenta eliminada. ¡Hasta pronto!");
+      window.location.href = "index.html";
+    }catch(err){ toast(err.message || "No se pudo eliminar la cuenta"); }
+  });
+
+  // ====== PROGRAMACIÓN (admin) ======
+  function renderProgRows(data){
+    const cont = $("#progRows");
+    cont.innerHTML = "";
+    const blocks = data?.blocks || Array.from({length:6}).map(()=>({start:"", end:"", programa:"", conductor:"", invitados:""}));
+    blocks.forEach((b, i)=>{
+      const row = document.createElement("div");
+      row.className = "grid6";
+      row.innerHTML = `
+        <input type="time" value="${b.start||""}" data-k="start">
+        <input type="time" value="${b.end||""}" data-k="end">
+        <input type="text" value="${b.programa||""}" placeholder="Nombre del programa" data-k="programa">
+        <input type="text" value="${b.conductor||""}" placeholder="Conductor" data-k="conductor">
+        <input type="text" value="${b.invitados||""}" placeholder="Invitados" data-k="invitados">
+        <div style="display:grid;place-items:center;font-weight:800">${i+1}</div>
+      `;
+      cont.appendChild(row);
+    });
+  }
+
+  function initProgramacion(){
+    $("#progDate").value = todayStr();
+
+    $("#btnLoadProg").addEventListener("click", async ()=>{
+      const d = $("#progDate").value || todayStr();
+      const ref = doc(db,"programacion", d);
+      const snap = await getDoc(ref);
+      renderProgRows(snap.exists()? snap.data() : null);
+      toast("Programación cargada");
+    });
+
+    $("#btnSaveProg").addEventListener("click", async ()=>{
+      const d = $("#progDate").value || todayStr();
+      const rows = Array.from($("#progRows").children);
+      const blocks = rows.map(r=>{
+        const g = (k)=>r.querySelector(`[data-k="${k}"]`).value.trim();
+        return { start:g("start"), end:g("end"), programa:g("programa"), conductor:g("conductor"), invitados:g("invitados") };
+      });
+      if(blocks.length !== 6) return toast("Deben ser 6 bloques");
+      await setDoc(doc(db,"programacion", d), { blocks, updatedAt: serverTimestamp(), updatedBy: currentUser.uid });
+      toast("Programación guardada");
+    });
+
+    // Cargar hoy por defecto
+    $("#btnLoadProg").click();
+  }
+
+  // ====== GESTIÓN DE USUARIOS (admin) ======
+  function formatDate(ts){
+    try{
+      const dt = ts?.toDate ? ts.toDate() : new Date(ts);
+      return dt.toLocaleDateString();
+    }catch{ return ""; }
+  }
+
+  async function loadUsers(){
+    const role = $("#fltRole").value;
+    const from = $("#fltFrom").value;
+    const to = $("#fltTo").value;
+
+    let qref = collection(db,"users");
+    const clauses = [];
+    if(role) clauses.push(where("role","==",role));
+    if(from) clauses.push(where("createdAt",">=", toTS(from)));
+    if(to)   clauses.push(where("createdAt","<=", Timestamp.fromDate(new Date(to+"T23:59:59"))));
+
+    if(clauses.length){
+      // construir query con clausulas (puede requerir index)
+      // @ts-ignore
+      qref = query(qref, ...clauses, orderBy("createdAt","desc"));
+    }else{
+      // @ts-ignore
+      qref = query(qref, orderBy("createdAt","desc"), limit(100));
+    }
+
+    const snap = await getDocs(qref);
+    const tbody = $("#usersTbody");
+    tbody.innerHTML = "";
+    snap.forEach(docu=>{
+      const u = docu.data();
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${u.displayName || ""}</td>
+        <td>${u.email || ""}</td>
+        <td>${u.username || ""}</td>
+        <td>
+          <select data-uid="${u.uid}" class="selRole">
+            <option value="admin" ${u.role==="admin"?"selected":""}>admin</option>
+            <option value="periodista" ${u.role==="periodista"?"selected":""}>periodista</option>
+            <option value="espectador" ${u.role==="espectador"?"selected":""}>espectador</option>
+          </select>
+        </td>
+        <td>${formatDate(u.createdAt)}</td>
+        <td><button class="btn btnSmall" data-act="saveRole" data-uid="${u.uid}">Guardar rol</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Guardar cambios de rol
+    tbody.querySelectorAll('button[data-act="saveRole"]').forEach(btn=>{
+      btn.addEventListener("click", async ()=>{
+        const uid = btn.getAttribute("data-uid");
+        const sel = tbody.querySelector(`select[data-uid="${uid}"]`);
+        const newRole = sel.value;
+        try{
+          await updateDoc(doc(db,"users", uid), { role:newRole });
+          toast("Rol actualizado");
+        }catch(err){
+          toast(err.message || "No se pudo actualizar el rol (verifica reglas y config/admins)");
+        }
+      });
+    });
+  }
+
+  function initGestionUsuarios(){
+    $("#btnApplyUsers").addEventListener("click", loadUsers);
+    $("#btnResetUsers").addEventListener("click", ()=>{
+      $("#fltRole").value="";
+      $("#fltFrom").value="";
+      $("#fltTo").value="";
+      loadUsers();
+    });
+    loadUsers();
+  }
+
+  // ====== NOTAS (periodista) ======
+  async function refreshNotasList(){
+    const lis = $("#listaNotas");
+    lis.innerHTML = "";
+    const qref = query(collection(db,"notas"), where("autorUid","==", currentUser.uid), orderBy("updatedAt","desc"));
+    const snap = await getDocs(qref);
+    snap.forEach(d=>{
+      const n = d.data();
+      const li = document.createElement("li");
+      li.innerHTML = `<button class="btn" data-id="${d.id}">${n.titulo} · <span class="muted">${n.estado}</span></button>`;
+      lis.appendChild(li);
+    });
+    lis.querySelectorAll("button").forEach(b=>{
+      b.addEventListener("click", async ()=>{
+        const id = b.getAttribute("data-id");
+        const s = await getDoc(doc(db,"notas", id));
+        if(s.exists()){
+          const n = s.data();
+          currentNoteId = id;
+          $("#notaTitulo").value = n.titulo || "";
+          $("#notaCuerpo").value = n.cuerpo || "";
+          $("#notaEstado").value = n.estado || "borrador";
+        }
+      });
+    });
+  }
+
+  function initNotas(){
+    $("#btnNuevaNota").addEventListener("click", ()=>{
+      currentNoteId = null;
+      $("#notaTitulo").value = "";
+      $("#notaCuerpo").value = "";
+      $("#notaEstado").value = "borrador";
+    });
+
+    $("#btnGuardarNota").addEventListener("click", async ()=>{
+      const titulo = $("#notaTitulo").value.trim();
+      const cuerpo = $("#notaCuerpo").value.trim();
+      const estado = $("#notaEstado").value;
+      if(!titulo) return toast("Agrega un título");
+
+      if(currentNoteId){
+        await updateDoc(doc(db,"notas", currentNoteId), {
+          titulo, cuerpo, estado, updatedAt: serverTimestamp()
+        });
+      }else{
+        const ref = await addDoc(collection(db,"notas"), {
+          titulo, cuerpo, estado,
+          autorUid: currentUser.uid,
+          autorNombre: currentUser.displayName || "Periodista",
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+        currentNoteId = ref.id;
+      }
+      toast("Nota guardada");
+      refreshNotasList();
+    });
+
+    $("#btnBorrarNota").addEventListener("click", async ()=>{
+      if(!currentNoteId) return toast("Seleccioná una nota");
+      if(!confirm("¿Borrar esta nota?")) return;
+      await deleteDoc(doc(db,"notas", currentNoteId));
+      currentNoteId = null;
+      $("#notaTitulo").value = "";
+      $("#notaCuerpo").value = "";
+      $("#notaEstado").value = "borrador";
+      toast("Nota borrada");
+      refreshNotasList();
+    });
+
+    refreshNotasList();
+  }
+
+  document.getElementById("btn-logout").addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      // Redirigir al login o home
+      window.location.href = "login.html";
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      alert("No se pudo cerrar sesión. Inténtalo de nuevo.");
+    }
+  });
+</script>
+
+<!-- Firebase core (ya lo tenés) -->
+<script type="module" src="js/firebase.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RADIO DJ 101.5 - Noticias</title>
+  <style>
+    :root{
+      --red:#d83c40;
+      --navy:#1e3550;
+      --bg:#f2f4f7;
+      --text:#1a1f29;
+      --muted:#6b7789;
+      --radius:12px;
+      --shadow:0 6px 12px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+
+    /* Header */
+    .topbar{background:var(--red);color:#fff;padding:14px 24px;position:sticky;top:0;z-index:50}
+    .topbar .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800}
+    nav ul{display:flex;gap:20px;list-style:none}
+    nav a{font-weight:600;opacity:.95}
+    nav a:hover{text-decoration:underline;opacity:1}
+
+    /* Layout */
+    .frame{max-width:1100px;margin:0 auto;position:relative;padding:32px 24px}
+    .side-banner{position:absolute;top:64px;bottom:0;width:38px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:8px}
+    .side-banner.left{left:-48px}
+    .side-banner.right{right:-48px}
+    .side-banner span{writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:2px;font-weight:800}
+
+    /* Noticias */
+    .news-card{background:#fff;box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden;padding:20px}
+    .news-header{background:var(--red);color:#fff;padding:14px 20px;font-weight:800;font-size:1.2rem;text-align:center;margin:-20px -20px 20px -20px;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
+
+    /* Tabs estilo barra */
+    .tabs{display:flex;gap:28px;justify-content:flex-start;padding:0 10px;border-bottom:2px solid #eee;margin-bottom:24px;}
+    .tab{padding:10px 0;font-weight:600;cursor:pointer;position:relative;color:var(--text);font-size:1rem;}
+    .tab.active{color:var(--red)}
+    .tab.active::after{content:'';position:absolute;left:0;bottom:-2px;width:100%;height:3px;background:var(--red);border-radius:2px}
+
+    /* Noticias grid */
+    .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+    .card{background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .thumb{background:#e9edf2;height:160px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:2rem}
+    .card-body{padding:16px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+    .badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:.75rem;font-weight:600;margin-bottom:8px;color:#fff}
+    .badge.local{background:#d83c40}
+    .badge.internacional{background:#1e3550}
+    .badge.musica{background:#7a3dc7}
+    .badge.cultura{background:#f39c12}
+
+    .card-body h3{font-size:1.05rem;margin-bottom:8px;color:var(--text)}
+    .card-body p{font-size:.9rem;color:var(--muted);margin-bottom:12px;flex:1}
+    .read-more{font-weight:600;color:var(--red);font-size:.9rem;cursor:pointer}
+
+    .comments{margin-top:12px;font-size:.85rem;color:var(--text)}
+    .comments b{color:var(--text)}
+    .comments span{display:block;color:var(--muted);margin-left:8px;font-size:.82rem}
+
+    /* Footer */
+    footer{background:var(--navy);color:#e7edf6;margin-top:40px}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+    footer h4{margin-bottom:12px;color:#fff}
+    .links{display:grid;gap:8px}
+    .btn-live{background:#ef4452;color:#fff;font-weight:700;border:none;border-radius:999px;padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+    .badges{display:flex;gap:8px;margin-top:10px}
+    .badge-store{border:1px solid #9fb1c6;border-radius:6px;padding:6px 10px;font-size:.82rem}
+    .badge1{display:inline-flex; align-items:center; gap:6px; background-color: black; border-radius:8px; padding:8px 10px; font-size:.82rem}
+    .badge2{display:inline-flex; align-items:center; gap:6px; background-color: green; border-radius:8px; padding:8px 10px; font-size:.82rem}
+    .copyright{text-align:center;border-top:1px solid rgba(255,255,255,.2);padding:14px 0;margin-top:20px;font-size:.85rem}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .footer-inner{grid-template-columns:1fr}
+      .side-banner{display:none}
+    }
+  </style>
+</head>
+<body>
+  
+  <site-header></site-header>
+
+  <div class="frame">
+    <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
+    <aside class="side-banner right"><span>PUBLICIDAD</span></aside>
+
+    <section class="news-card">
+      <div class="news-header">NOTICIAS</div>
+      <div class="tabs">
+        <div class="tab active" data-category="all">Todas</div>
+        <div class="tab" data-category="local">Locales</div>
+        <div class="tab" data-category="internacional">Internacionales</div>
+        <div class="tab" data-category="musica">Música</div>
+        <div class="tab" data-category="cultura">Cultura</div>
+      </div>
+
+      <div class="news-grid">
+        <article class="card" data-category="local">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <span class="badge local">Local</span>
+            <h3>Ayuntamiento aprueba desarrollo de nuevo parque</h3>
+            <p>El ayuntamiento ha aprobado por unanimidad la financiación para un nuevo parque comunitario en el centro de la ciudad.</p>
+            <span class="read-more">Leer Más</span>
+            <div class="comments">
+              <b>Comentarios (3)</b>
+              <span><b>Juan D.:</b> ¡Excelentes noticias para nuestra comunidad!</span>
+              <span><b>Sara M.:</b> Espero que incluyan un área para perros.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-category="internacional">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <span class="badge internacional">Internacional</span>
+            <h3>Cumbre Climática Global alcanza nuevo acuerdo</h3>
+            <p>Los líderes mundiales han llegado a un acuerdo histórico sobre la reducción de emisiones de carbono en la cumbre climática anual.</p>
+            <span class="read-more">Leer Más</span>
+            <div class="comments">
+              <b>Comentarios (5)</b>
+              <span><b>María L.:</b> ¡Por fin buenas noticias!</span>
+              <span><b>David R.:</b> Necesitamos más acción, no solo acuerdos.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-category="musica">
+          <div class="thumb"></div>
+          <div class="card-body">
+            <span class="badge musica">Música</span>
+            <h3>Banda local lanza álbum debut con aclamación crítica</h3>
+            <p>Los héroes locales "Las Ondas Sonoras" han lanzado su primer álbum con excelentes críticas.</p>
+            <span class="read-more">Leer Más</span>
+            <div class="comments">
+              <b>Comentarios (7)</b>
+              <span><b>Alex T.:</b> ¡Los sigo desde su primer concierto!</span>
+              <span><b>Jaime K.:</b> La tercera canción es absolutamente increíble.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <site-footer></site-footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.card');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const category = tab.getAttribute('data-category');
+        cards.forEach(card => {
+          if(category === 'all' || card.dataset.category === category){
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+<script type="module" src="js/componentes.js"></script>
+
+</body>
+</html>

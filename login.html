@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - RADIO DJ 101.5</title>
+
+  <!-- Tipografía y estilos globales -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Igual que en index: estilos del footer -->
+  <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+
+  <!-- Igual que en index -->
+  <site-header></site-header>
+
+  <!-- Contenido de login -->
+  <main style="display:grid; place-items:center; min-height:calc(100dvh - 160px); padding:24px;">
+    <div class="login-card">
+      <div class="logo">RADIO DJ 101.5</div>
+      <h1>Inicia Sesión</h1>
+
+      <form id="loginForm">
+        <div class="input-wrapper">
+          <span class="icon">👤</span>
+          <input id="loginUserOrEmail" type="text" placeholder="Usuario o Email" required>
+        </div>
+        <div class="input-wrapper">
+          <span class="icon">🔒</span>
+          <input id="loginPassword" type="password" placeholder="Contraseña" required>
+        </div>
+
+        <div class="checkbox-container">
+          <label><input type="checkbox" id="rememberMe"> Recordarme</label>
+          <a href="olvidaste_contraseña.html">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit">Ingresar</button>
+      </form>
+
+      <div class="links">
+        <a href="registro.html">Registrarse</a>
+        <a href="#">Ayuda</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Igual que en index -->
+  <site-footer></site-footer>
+
+  <!-- Scripts (módulos) -->
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/componentes.js"></script>
+</body>
+</html>

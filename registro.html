@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro - RADIO DJ 101.5</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="register-card">
+    <div class="logo">RADIO DJ 101.5</div>
+    <h1>Crear Cuenta</h1>
+    <form id="registerForm">
+    <div class="input-wrapper">
+      <span class="icon">👤</span>
+      <input id="regFullName" type="text" placeholder="Nombre Completo" required>
+    </div>
+    <div class="input-wrapper">
+      <span class="icon">📧</span>
+      <input id="regEmail" type="email" placeholder="Email" required>
+    </div>
+    <div class="input-wrapper">
+      <span class="icon">🔒</span>
+      <input id="regPassword" type="password" placeholder="Contraseña" required>
+    </div>
+    <div class="input-wrapper">
+      <span class="icon">🔒</span>
+      <input id="regPassword2" type="password" placeholder="Confirmar Contraseña" required>
+    </div>
+    <button type="submit">Registrarse</button>
+  </form>
+    <div class="links">
+      <a href="login.html">¿Ya tienes cuenta? Iniciar sesión</a>
+    </div>
+  </div>
+</div>
+<!-- incluir en TODAS las páginas que usan auth/chat (al final del body) -->
+<script type="module" src="js/firebase.js"></script>
+
+<script type="module" src="js/auth.js"></script>
+
+</body>
+</html>

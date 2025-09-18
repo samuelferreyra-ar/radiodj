@@ -1,252 +1,100 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="google-site-verification" content="qSXsKJVIJjCObNcBVCWUSrp3SMfoviqsrQ8N8I31FoY" />
-  <!-- Título SEO -->
-  <title>Radio DJ 101.5 | Escuchá en Vivo Online y por FM en Argentina</title>
-
-  <!-- Meta Description SEO -->
-  <meta name="description" content="Escuchá Radio DJ 101.5 en vivo online o por FM. La mejor música, DJs en directo, noticias locales y entretenimiento desde Argentina. ¡Sintonizá ahora!">
-
-  <!-- Meta Keywords (opcional) -->
-  <meta name="keywords" content="radio dj 101.5, escuchar radio dj, radio online argentina, radio en vivo, radio fm argentina, radio dj 101.5 en vivo, radio dj online, radio argentina música, emisora online">
-
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://samuelferreyra-ar.github.io/radiodj/" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/logo-favicon.png" type="image/png">
-
-  <!-- Hoja de estilo -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RADIO DJ 101.5</title>
   <link rel="stylesheet" href="styles.css">
-
-  <!-- Aquí el bloque JSON-LD -->
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "RadioStation",
-  "name": "Radio DJ 101.5",
-  "url": "https://samuelferreyra-ar.github.io/radiodj/",
-  "logo": "",
-  "broadcastFrequency": "101.5 FM",
-  "broadcastArea": "Argentina"
-}
-</script>
-
+  <link rel="stylesheet" href="footer.css">
 </head>
-
 <body>
+  
+<site-header></site-header>
 
-  <!-- HEADER -->
-  <div id="header"></div>
-<script>
-  fetch('header.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-    });
-</script>
+  <div class="frame">
+    <aside class="side-banner left" aria-label="Publicidad"><span>PUBLICIDAD</span></aside>
+    <aside class="side-banner right" aria-label="Publicidad"><span>PUBLICIDAD</span></aside>
 
-  <!-- MAIN LAYOUT -->
-  <div class="layout">
-
-    <!-- LEFT SIDEBAR ADS -->
-    <div id="sidebar-left"></div>
-<script>
-  fetch('sidebar-left.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('sidebar-left').innerHTML = data;
-    });
-</script>
-
-
-    <!-- CENTER CONTENT -->
-    <main class="content">
-
-      <!-- HERO -->
-      <section class="hero">
-        <img src="assets/player.webp" alt="DJ al micrófono">
-        <!--<div class="play-button"></div>-->
-      </section>
-
-      <!-- CALENDAR -->
-      <section class="calendar">
-        <h2>MAYO 2025</h2>
-        <div class="calendar-grid">
-          <div class="day-name">D</div><div class="day-name">L</div><div class="day-name">M</div>
-          <div class="day-name">X</div><div class="day-name">J</div><div class="day-name">V</div>
-          <div class="day-name">S</div>
-
-          <!-- blank for days before the 1st -->
-          <div></div><div></div><div></div>
-          <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div>
-
-          <!-- full weeks -->
-          <div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div>
-          <div class="day">9</div><div class="day">10</div><div class="day">11</div>
-
-          <div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
-          <div class="day">16</div><div class="day">17</div><div class="day">18</div>
-
-          <div class="day">19</div><div class="day">20</div><div class="day">21</div>
-          <div class="day day--event">22</div><div class="day">23</div><div class="day">24</div>
-          <div class="day">25</div>
-
-          <div class="day">26</div><div class="day">27</div><div class="day">28</div>
-          <div></div><div></div><div></div><div></div>
+    <section class="hero" role="banner">
+      <div class="hero-inner">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/iipR5yUp36o?si=sumcmuU_RIMLwvGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- index.html (dentro de .hero-inner, al lado del disco) -->
+        <div class="live-chat" aria-label="Chat en vivo">
+          <div class="chat-header">Chat en vivo</div>
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+          <form id="chatForm" class="chat-input-area">
+            <input id="chatInput" type="text" placeholder="Escribe un mensaje..." maxlength="400" required>
+            <button type="submit" title="Enviar">Enviar</button>
+          </form>
+          <div id="chatLoginHint" class="chat-hint" hidden>
+            Inicia sesión para participar en el chat.
+            <a href="login.html" class="chat-login-link">Iniciar sesión</a>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- NEWS SECTION -->
-      <section class="news">
-        <h2>NOTICIAS LOCALES</h2>
-        <div class="news-cards">
-          <article class="card">
-            <img src="assets/news_1.webp" alt="">
-            <h3>Titular de la noticia local en este espacio</h3>
-            <p>Titular de noticia local en este espacio.</p>
-          </article>
-          <article class="card">
-            <img src="assets/news_2.webp" alt="">
-            <h3>Titular de la noticia local en este espacio</h3>
-            <p>Titular de noticia local en este espacio.</p>
-          </article>
-          <article class="card">
-            <img src="assets/news_3.webp" alt="">
-            <h3>Titular de la noticia local en este espacio</h3>
-            <p>Titular de noticia local en este espacio.</p>
-          </article>
-        </div>
-      </section>
+    <section class="card calendario" aria-label="Calendario de programación">
+  <div class="cal-head">
+    <button class="cal-nav" id="calPrev" aria-label="Mes anterior">‹</button>
+    <h2 id="calTitle">Mes Año</h2>
+    <button class="cal-nav" id="calNext" aria-label="Mes siguiente">›</button>
+  </div>
+  <div class="cal-grid" id="calGrid" role="grid" aria-labelledby="calTitle">
+    <!-- se rellena con JS -->
+  </div>
+</section>
 
-    </main>
-      
-    <!-- RIGHT SIDEBAR ADS -->
-    <div id="sidebar-right"></div>
-<script>
-  fetch('sidebar-right.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('sidebar-right').innerHTML = data;
-    });
-</script>
-
-<!-- BOTTOM BANNER -->
-<div class="ad-banner" style="grid-column: 1 / span 3;">
-  <img src="assets/ad_united24.webp" alt="United24 Media">
-</div>
+<!-- Modal popup -->
+<div class="cal-modal" id="calModal" aria-hidden="true" role="dialog" aria-labelledby="calModalTitle">
+  <div class="cal-modal__dialog">
+    <div class="cal-modal__head">
+      <h3 id="calModalTitle">Programación del día</h3>
+      <button id="calModalClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="cal-modal__body" id="calModalBody">
+      <!-- items de programas -->
+    </div>
+  </div>
 </div>
 
-<!-- FOOTER -->
-<div id="footer"></div>
-<script>
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer').innerHTML = data;
-    });
-</script>
+    <section id="noticias" class="news-section" aria-labelledby="news-title">
+      <h2 id="news-title">NOTICIAS LOCALES</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="thumb"><div class="avatar" aria-hidden="true"></div></div>
+          <div class="card-body">
+            <h3>Titular de noticia local aquí</h3>
+            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="img2" aria-hidden="true"></div></div>
+          <div class="card-body">
+            <h3>Titular de noticia local aquí</h3>
+            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="shape" aria-hidden="true"></div></div>
+          <div class="card-body">
+            <h3>Titular de noticia local aquí</h3>
+            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-    <div id="tos-bar" class="tos-bar">
-  <p>Al continuar navegando aceptás nuestros 
-    <a href="#" id="open-tos-modal">Términos y Condiciones</a>.
-  </p>
-  <button id="accept-tos">Aceptar</button>
-</div>
-
-<!-- TOS Modal -->
-<div id="tos-modal" class="tos-modal">
-  <div class="tos-modal-content">
-    <span id="close-tos-modal" class="close-button">&times;</span>
-    <h2>Términos y Condiciones de Uso</h2>
-<p><em>Última actualización: 1 de junio de 2025</em></p>
-
-<p>Bienvenido/a al sitio web oficial de <strong>Radio DJ 101.5</strong>. Al acceder y utilizar este sitio, aceptás los siguientes Términos y Condiciones:</p>
-
-<h3>1. Información General</h3>
-<p>Radio DJ 101.5 opera en la frecuencia <strong>FM 101.5 MHz</strong> y a través de su plataforma de transmisión en línea en Argentina. Nuestro sitio web tiene como objetivo brindar información sobre nuestra programación, noticias, actividades, sorteos y ofrecer espacios publicitarios para anunciantes.</p>
-
-<h3>2. Propiedad Intelectual</h3>
-<p>Todos los contenidos del sitio (textos, imágenes, audios, logotipos, material multimedia, diseño) son propiedad de Radio DJ 101.5 o de terceros que han autorizado su uso. Está prohibida su reproducción, distribución o modificación sin autorización previa por escrito.</p>
-
-<h3>3. Publicidad y Enlaces de Terceros</h3>
-<p>Radio DJ 101.5 ofrece espacios publicitarios en su sitio y en su transmisión radial. Los anuncios y enlaces a sitios de terceros son responsabilidad de los respectivos anunciantes. Radio DJ 101.5 no se responsabiliza por la veracidad, calidad o disponibilidad de los productos y servicios ofrecidos por terceros.</p>
-
-<h3>4. Sorteos y Promociones</h3>
-<p>Frecuentemente realizamos sorteos y promociones en colaboración con comercios y marcas locales.</p>
-<p><strong>Condiciones básicas de participación:</strong></p>
-<ul>
-  <li>Pueden participar personas físicas mayores de 18 años, residentes en Argentina.</li>
-  <li>Los sorteos se realizan en fechas y condiciones que serán especificadas en cada promoción particular.</li>
-  <li>Los premios no son transferibles ni canjeables por dinero en efectivo.</li>
-  <li>Los ganadores serán notificados por los medios indicados en cada sorteo (redes sociales, sitio web o contacto directo).</li>
-  <li>Radio DJ 101.5 no se responsabiliza por el uso o disfrute de los premios una vez entregados.</li>
-</ul>
-
-<h3>5. Privacidad y Protección de Datos</h3>
-<p>Radio DJ 101.5 respeta tu privacidad. Los datos personales que nos proporciones (por ejemplo, al participar en sorteos o al contactarnos) serán utilizados exclusivamente para los fines indicados y no serán compartidos con terceros sin tu consentimiento, salvo obligación legal.</p>
-<p>Podés consultar nuestra <strong>Política de Privacidad</strong> para más información.</p>
-
-<h3>6. Uso del Sitio</h3>
-<p>El uso del sitio debe ser conforme a la legislación vigente en Argentina. Está prohibido el uso con fines ilícitos, difamatorios o que perjudiquen a Radio DJ 101.5 o a terceros.</p>
-
-<h3>7. Modificaciones</h3>
-<p>Radio DJ 101.5 se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigencia una vez publicadas en este sitio.</p>
-
-<h3>8. Jurisdicción</h3>
-<p>Estos Términos y Condiciones se rigen por las leyes de la República Argentina. Cualquier controversia será sometida a la jurisdicción de los tribunales ordinarios de la Ciudad de <strong>Buenos Aires</strong>.</p>
-
-<p>Si tenés dudas o consultas sobre estos Términos y Condiciones, podés contactarnos a través de nuestro formulario de contacto o al correo electrónico <a href="mailto:contacto@radiodj1015.com">contacto@radiodj1015.com</a>.</p>
+<site-footer></site-footer>
 
   </div>
 
-
-
-  </div>
-  <script>
-    document
-      .getElementById('menu-toggle')
-      .addEventListener('click', () => {
-        document
-          .querySelector('.nav-menu')
-          .classList.toggle('open');
-      });
-  </script>
-  <script>
-  // Show/hide TOS bar
-  if (!localStorage.getItem('tosAccepted')) {
-    document.getElementById('tos-bar').style.display = 'flex';
-  }
-
-  document.getElementById('accept-tos').addEventListener('click', () => {
-    localStorage.setItem('tosAccepted', 'true');
-    document.getElementById('tos-bar').style.display = 'none';
-  });
-
-  // Show TOS modal
-  document.getElementById('open-tos-modal').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('tos-modal').style.display = 'block';
-  });
-
-  // Close TOS modal
-  document.getElementById('close-tos-modal').addEventListener('click', () => {
-    document.getElementById('tos-modal').style.display = 'none';
-  });
-
-  // Close modal if clicking outside the modal content
-  window.addEventListener('click', (e) => {
-    const modal = document.getElementById('tos-modal');
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-</script>
+  <!-- incluir en TODAS las páginas que usan auth/chat (al final del body) -->
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/chat.js"></script>
+<script type="module" src="js/componentes.js"></script>
+<script type="module" src="js/calendario.js"></script>
 
 </body>
+
 </html>
