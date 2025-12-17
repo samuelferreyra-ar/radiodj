@@ -6,17 +6,31 @@
 <title>Registro - RADIO DJ 101.5</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!-- Igual que en index: estilos del footer -->
+  <link rel="stylesheet" href="footer.css">
+  <style>
+    .field-valid { border: 2px solid #22c55e !important; outline: none; }
+    .field-invalid { border: 2px solid #ef4444 !important; outline: none; }
+
+    .help { display:block; font-size:.85rem; margin:.25rem 0 0; }
+    .help.error { color:#ef4444; }
+    .help.ok { color:#16a34a; }
+
+    button[disabled] { opacity:.6; cursor:not-allowed; }
+  </style>
 </head>
 <body>
 
-<div class="container">
+<div id="header"></div>
+
+<div class="container" style="display:grid; place-items:center; padding: 5% 10%;">
   <div class="register-card">
     <div class="logo">RADIO DJ 101.5</div>
     <h1>Crear Cuenta</h1>
     <form id="registerForm">
     <div class="input-wrapper">
       <span class="icon">👤</span>
-      <input id="regFullName" type="text" placeholder="Nombre Completo" required>
+      <input id="regUsername" type="text" placeholder="Nombre de usuario (letras y números)" required>
     </div>
     <div class="input-wrapper">
       <span class="icon">📧</span>
@@ -37,7 +51,17 @@
     </div>
   </div>
 </div>
+
+<div id="footer"></div>
+
+<!-- validator.js (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/validator@13.11.0/validator.min.js"></script>
+
+<!-- Validación de registro (nuevo) -->
+<script type="module" src="js/validacion-registro.js"></script>
+
 <!-- incluir en TODAS las páginas que usan auth/chat (al final del body) -->
+ <script type="module" src="js/componentes.js"></script>
 <script type="module" src="js/firebase.js"></script>
 
 <script type="module" src="js/auth.js"></script>

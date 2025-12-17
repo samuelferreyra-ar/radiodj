@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayuda - RADIO DJ 101.5</title>
+
+  <!-- Tipografía y estilos globales -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    /* Ajuste para la tarjeta de ayuda */
+    .ayuda-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      max-width: 900px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ayuda-header {
+      background: #c62828;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ayuda-body {
+      padding: 24px;
+    }
+
+    /* Estilos acordeón */
+    .accordion-item {
+      border-bottom: 1px solid #eee;
+    }
+
+    .accordion-button {
+      width: 100%;
+      text-align: left;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion-button:hover {
+      background: #f7f7f7;
+    }
+
+    .accordion-button span {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 12px;
+    }
+
+    .accordion-content p,
+    .accordion-content li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 8px 0;
+      color: #444;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 500px; /* suficiente espacio */
+      padding: 12px;
+    }
+
+    .accordion-item.active .accordion-button span {
+      transform: rotate(90deg);
+    }
+
+    .back-login {
+      text-align: center;
+      padding: 16px;
+      border-top: 1px solid #eee;
+    }
+
+    .back-login a {
+      color: #c62828;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-login a:hover {
+      text-decoration: underline;
+    }
+    .reclamo-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .reclamo-form .form-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .reclamo-form label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .reclamo-form input,
+    .reclamo-form textarea {
+      width: 100%;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      background: #fafafa;
+      outline: none;
+      transition: box-shadow .2s, border-color .2s, background .2s;
+    }
+
+
+    .btn-enviar {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      background: #c62828;
+      color: #fff;
+      cursor: pointer;
+      justify-self: start;
+      transition: transform .05s ease, opacity .2s ease, box-shadow .2s ease;
+      box-shadow: 0 3px 10px rgba(198,40,40,.25);
+    }
+
+    .btn-enviar:hover { opacity: .95; }
+    .btn-enviar:active { transform: translateY(1px); }
+
+    .form-note {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      min-height: 1.2em;
+    }
+    .input-ok {
+  border-color: #2e7d32 !important;          /* verde */
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15) !important;
+}
+.input-error {
+  border-color: #c62828 !important;          /* rojo */
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12) !important;
+}
+.error-list{ color:#c62828; font-size:.9rem; margin-top:6px; }
+
+/* Focus neutro por defecto */
+.reclamo-form input:focus,
+.reclamo-form textarea:focus{
+  border-color:#9aa4b2;
+  box-shadow:0 0 0 3px rgba(102,112,133,.15);
+  background:#fff;
+}
+
+/* Estados de validación (ganan también en focus) */
+.reclamo-form .input-ok,
+.reclamo-form .input-ok:focus{
+  border-color:#2e7d32 !important;
+  box-shadow:0 0 0 3px rgba(46,125,50,.15) !important;
+}
+.reclamo-form .input-error,
+.reclamo-form .input-error:focus{
+  border-color:#c62828 !important;
+  box-shadow:0 0 0 3px rgba(198,40,40,.12) !important;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Igual que en index -->
+  <div id="header"></div>
+
+  <!-- Contenido de ayuda -->
+  <main style="display:grid; place-items:center; min-height:calc(100dvh - 160px); padding:24px;">
+    <div class="ayuda-card">
+      <div class="ayuda-header">RADIO DJ 101.5 – Centro de Ayuda</div>
+      <div class="ayuda-body">
+
+        <div class="accordion">
+          <div class="accordion-item" id="reportar-problema">
+            <button class="accordion-button">Reportar un problema <span>▶</span></button>
+            <div class="accordion-content">
+              <form id="reclamoForm" class="reclamo-form">
+                <div class="form-row">
+                  <label for="ubicacion">Ubicación</label>
+                  <input id="ubicacion" name="ubicacion" type="text" required placeholder="¿En qué sección sucedió?" minlength="3" maxlength="80" inputmode="latin-name" />
+                </div>
+
+                <div class="form-row">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Describa el problema o sugerencia" minlength="10" maxlength="800"></textarea>
+                </div>
+
+                <button type="submit" id="btnEnviarReclamo" class="btn-enviar">Enviar</button>
+                <div class="form-note" id="reclamoNota" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-button">FAQ / Preguntas Frecuentes <span>▶</span></button>
+            <div class="accordion-content">
+              <ul>
+                <li><strong>¿Qué hago si no me llega el mail de confirmación?</strong>  
+                Revisa la carpeta de spam o correo no deseado. Si no aparece, contacta con soporte.</li>
+                <li><strong>¿Qué navegador funciona mejor?</strong>  
+                Recomendamos Chrome, Firefox o Edge en su versión más actualizada.</li>
+                <li><strong>¿Cómo actualizo mi contraseña si aún puedo entrar?</strong>  
+                Desde tu perfil accede a la opción “Cambiar contraseña”.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button">Instrucciones de uso del login <span>▶</span></button>
+            <div class="accordion-content">
+              <p>Ingresa tu correo electrónico y contraseña tal como te registraste. Revisa mayúsculas/minúsculas.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button">Recomendaciones técnicas <span>▶</span></button>
+            <div class="accordion-content">
+              <p>Asegúrate de tener conexión a Internet y que tu navegador esté actualizado.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button">Canales de soporte <span>▶</span></button>
+            <div class="accordion-content">
+              <p>Email: <a href="mailto:soporte@ejemplo.com">radiodj@hotmail.com</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+ <!-- Contenido de ayuda 
+      <div class="back-login">
+        <a href="login.html">← Volver al login</a>
+      </div>-->
+    </div>
+  </main>
+
+  <!-- Incluyendo componente footer -->
+
+  <div id="footer"></div>
+
+  <!-- Importación de componentes -->
+  <script type="module" src="js/componentes.js"></script>
+
+  <!-- 
+
+  ABM USUARIO
+
+  -->
+
+  <script type="module">
+  import { franc } from 'https://cdn.jsdelivr.net/npm/franc-min@6.2.0/+esm'; //Importamos el diccionario franc
+  import { auth, db } from "./js/firebase.js"; //Importamos el modulo de autenticacion y de conexion con nuestra BD
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+  //Tomo referencias del formulario, del botón de enviar reclamo y del mensaje de estado del reclamo
+
+  const form = document.getElementById('reclamoForm'); 
+  const btn  = document.getElementById('btnEnviarReclamo');
+  const nota = document.getElementById('reclamoNota');
+
+// límites básicos para los campos, 1era validación
+const LIMITS = {
+  ubic_min: 5, ubic_max: 80,
+  desc_min: 15, desc_max: 800,
+  max_newlines: 12,
+  max_repeat: 3,        // máx. 4 caracteres idénticos seguidos
+};
+
+// contadores en vivo
+const uInput = document.getElementById('ubicacion');
+const dInput = document.getElementById('descripcion');
+const uCount = document.getElementById('uCount');
+const dCount = document.getElementById('dCount');
+
+[uInput, dInput].forEach(el=>{
+  el?.addEventListener('input', ()=>{
+
+    // revalida y aplica .input-ok / .input-error en vivo
+
+    validate(getFormData());
+    setMsg('');
+  });
+});
+
+uInput?.addEventListener('input', ()=> { if(uCount) uCount.textContent = String(uInput.value.length); });
+dInput?.addEventListener('input', ()=> { if(dCount) dCount.textContent = String(dInput.value.length); });
+
+// Contador de palabras: cualquier secuencia de letras (unicode)
+const WORD_RE = /\p{L}+/gu;
+function countWords(str){
+  if (!str) return 0;
+  const m = String(str).normalize('NFC').match(WORD_RE);
+  return m ? m.length : 0;
+}
+
+// --- Whitelist de palabras (pasan automaticamente) ---
+
+const UI_ALLOWLIST = new Set([
+  'inicio','página','pagina','principal','página principal','pagina principal',
+  'programación','programacion','reproductor','home','contacto','ayuda','nosotros',
+  'servicios','login','ingresar','registro','registrarse','perfil','cuenta','faq','soporte','reclamos'
+]);
+
+// Detector de palabras plausibles (Evita lo que llamamos "key smashing" como "fkjfksjf")
+
+function isPlausibleWord(word) {
+  if (!word) return false;
+  const w = word.normalize('NFC').toLowerCase().trim();
+  if (!/^\p{L}+$/u.test(w)) return false;                // solo letras unicode
+  if (w.length < 2 || w.length > 18) return false;       // longitud razonable
+  if (!/[aeiouáéíóúü]/i.test(w)) return false;           // requiere vocal
+  if (/[bcdfghjklmnñpqrstvwxyz]{4,}/i.test(w)) return false; // 4+ consonantes seguidas
+  return true;
+}
+
+// Validador específico de "Ubicación"
+function isValidUbicacionText(text) {
+  if (!text) return false;
+  const cleaned = text.normalize('NFC').toLowerCase().replace(/\s+/g, ' ').trim();
+
+  if (UI_ALLOWLIST.has(cleaned)) return true;
+
+  const tokens = cleaned.split(' ').filter(Boolean);
+  if (tokens.length === 1) {    //La respuesta esperada más común es una sola palabra, asi que lo tratamos de manera particular
+    const w = tokens[0];
+    if (UI_ALLOWLIST.has(w)) return true;
+    if (!isPlausibleWord(w)) return false;
+
+    // Desempate opcional con el diccionario franc si la palabra es larga
+    if (w.length >= 8) {
+      const code = franc(w, { minLength: Math.min(8, w.length) });
+      if (!['spa','cat','glg','por','eng'].includes(code)) return false;
+    }
+    return true;
+  }
+
+  if (tokens.length <= 5) {       //Más de 5 palabras no tiene sentido para ubicación
+    if (tokens.every(t => UI_ALLOWLIST.has(t) || isPlausibleWord(t))) return true;
+
+    const joined = tokens.join(' ');
+    if (joined.length >= 12) {
+      const code = franc(joined, { minLength: 8 });
+      if (!['spa','cat','glg','por','eng'].includes(code)) return false;
+    }
+    return true;
+  }
+
+  return false;                 //Somos estrictos con el filtro, si son más de 5 palabras, es inválido
+}
+
+
+// Funcion auxiliar: Limpia estados de error
+function clearErrors(){
+  uInput?.classList.remove('input-error','input-ok');
+  dInput?.classList.remove('input-error','input-ok');
+  const old = document.getElementById('reclamoErrors');
+  if (old) old.remove();
+}
+
+// Funcion auxiliar: Pintar errores
+
+function showErrors(errs){
+  const box = document.createElement('div');
+  box.id = 'reclamoErrors';
+  box.className = 'error-list';
+  box.innerHTML = errs.map(e=>`• ${e}`).join('<br>');
+  nota?.insertAdjacentElement('beforebegin', box);
+}
+
+/* 
+
+Funcion principal de validación
+
+*/
+
+function validate({ ubicacion, descripcion }) {
+  clearErrors();
+  const errs = [];
+
+  const u = (ubicacion || '').trim();
+  const d = (descripcion || '').trim();
+
+// Limpieza de clases previas
+  uInput?.classList.remove('input-error','input-ok');
+  dInput?.classList.remove('input-error','input-ok');
+
+// Recuento de palabras
+  const uWords = countWords(u);
+  const dWords = countWords(d);
+
+// Idioma por franc para descripción (porque los diccionarios no son buenos para textos cortos)
+
+if (!seemsSpanish(d, { minChars: 20, minWords: 3, allowNeighbors: true })) {
+  errs.push('Descripción: el texto no parece estar en español.');
+}
+
+//Comprobación más flexible para Ubicación ya que puede ser una sola palabra
+
+if (!isValidUbicacionText(u)) {
+  errs.push('Ubicación: ingresá un nombre válido (p. ej., "Inicio", "Programación", "Reproductor").');
+}
+
+// Pintar estado de cada campo
+
+const ubicacionOk  = isValidUbicacionText(u) && (u.length <= LIMITS.ubic_max);
+const descripcionOk= (dWords >= 3) &&
+                     seemsSpanish(d, { minChars: 20, minWords: 3, allowNeighbors: true }) &&
+                   (d.length <= LIMITS.desc_max);
+
+  if (!ubicacionOk) uInput?.classList.add('input-error'); else uInput?.classList.add('input-ok');
+  if (!descripcionOk) dInput?.classList.add('input-error'); else dInput?.classList.add('input-ok');
+
+  
+
+  return { ok: ubicacionOk && descripcionOk, errs, clean: { ubicacion: u, descripcion: d } };
+}
+
+let sending = false;
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (sending) return; // anti-doble click
+  if (!currentUser) { setMsg('Debes iniciar sesión para enviar un reclamo.'); return; }
+
+  const raw = getFormData();
+  const val = validate(raw);
+  if (!val.ok) {
+    showErrors(val.errs);
+    setMsg('Revisá los errores marcados.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  sending = true;
+  setMsg('');
+
+  try {
+    const payload = {
+      reporterUid: currentUser.uid,
+      ubicacion: val.clean.ubicacion,
+      descripcion: val.clean.descripcion,
+      reporterEmail: currentUser.email,
+      reporterName: currentUser.displayName || 'Usuario',
+      estado: 'Recibido',
+      detalles: '',
+      createdAt: serverTimestamp()
+    };
+
+    await addDoc(collection(db, 'reclamos'), payload);
+    clearErrors();
+    setMsg('¡Gracias! Tu reclamo fue registrado correctamente.', true);
+    form.reset();
+    if (uCount) uCount.textContent = '0';
+    if (dCount) dCount.textContent = '0';
+  } catch (err) {
+    console.error('[reclamos] Error al crear documento:', err);
+    setMsg('No se pudo enviar el reclamo. Probá de nuevo en unos minutos.');
+  } finally {
+    sending = false;
+    btn.disabled = false;
+    btn.textContent = 'Enviar';
+  }
+});
+
+
+  let currentUser = null;
+
+// Importo onAuthStateChanged y dejo un observador que se dispara cada vez que el usuario inicia o cierra sesión (Escuchar el inicio de sesión)
+  onAuthStateChanged(auth, (u) => {
+    currentUser = u || null;
+
+    if (!currentUser) {
+// Desactiva formulario si no hay login
+      form?.classList.add('bloqueado');
+      if (btn) btn.disabled = true;
+      setMsg('Debes iniciar sesión para reportar un problema.'); //Si no hay usuario no se puede enviar
+    } else {
+      form?.classList.remove('bloqueado');
+      if (btn) btn.disabled = false;  //Si hay usuario puede enviar el reclamo
+      setMsg('');
+    }
+  });
+
+// Escribir un mensaje en "Reclamonota" y ponerle verde si ok=true y rojo si no
+
+  function setMsg(text, ok = false) {
+    if (!nota) return;
+    nota.textContent = text || '';
+    nota.style.color = ok ? '#2e7d32' : '#c62828';
+  }
+
+//Recogge y trimea los valores de ubicación y descripción
+
+  function getFormData() {
+    const ubicacion  = document.getElementById('ubicacion')?.value.trim() || '';
+    const descripcion= document.getElementById('descripcion')?.value.trim() || '';
+    return { ubicacion, descripcion };
+  }
+
+// Detecta si el texto parece estar en español usando franc
+function seemsSpanish(text, opts = {}) {
+  const {
+    minChars = 8,     // mínimo de caracteres para intentar franc
+    minWords = 2,     // mínimo de palabras para intentar franc
+    allowNeighbors = true // aceptar cat/glg/por como “español suficiente”
+  } = opts;
+
+  if (!text) return true;
+
+  const cleaned = String(text)
+    .normalize('NFC')
+    .toLowerCase()
+    .replace(/[^\p{L}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const words = cleaned ? cleaned.split(' ').filter(Boolean) : [];
+// Para entradas cortas o de 1 palabra, NO forzamos franc
+  if (cleaned.length < minChars || words.length < minWords) return true;
+
+  const code = franc(cleaned, { minLength: Math.min(20, Math.max(8, cleaned.length)) });
+
+  if (code === 'spa') return true;
+  if (allowNeighbors && ['cat', 'glg', 'por'].includes(code)) return true; // vecinas aceptadas
+  return false;
+}
+
+</script>
+
+<!-- Script acordeón -->
+<script>
+    document.querySelectorAll('.accordion-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+</script>
+  
+</body>
+</html>

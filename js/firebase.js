@@ -23,7 +23,7 @@ export const db   = getFirestore(app);
 
 // Útil para “Recordarme” en login
 export function setRememberPersistence(remember) {
-  // ✅ Nunca pases undefined; usa session si no se marca “Recordarme”
+  // Nunca pases undefined; usa session si no se marca “Recordarme”
   return setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
 }
 

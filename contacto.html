@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RADIO DJ 101.5 - Contacto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
   <style>
     :root{
       --red:#d83c40;
@@ -37,6 +40,7 @@
     .contact-card{background:#fff;box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden;padding:20px}
     .contact-header{background:var(--red);color:#fff;padding:14px 20px;font-weight:800;font-size:1.2rem;text-align:center;margin:-20px -20px 20px -20px;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
     .contact-body{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .icons{width: 30px; height: 30px;}
 
     form{display:grid;gap:12px}
     input,textarea{padding:10px;border:1px solid #ccd2da;border-radius:6px;font-size:.95rem}
@@ -50,8 +54,18 @@
     .social{display:flex;gap:10px;margin-top:10px}
     .social a{font-size:1.2rem;color:var(--navy)}
 
+    /* Nuestra Información */
+    .info {display: flex;flex-direction: column;gap: 18px;}
+    .info-item {display: flex;align-items: flex-start; gap: 12px;}
+    .info-icon {min-width: 38px;display: flex;justify-content: center;}
+    .info-icon img {width: 30px;height: 30px;}
+    .info-text strong {display: block;margin-bottom: 4px;font-size: 0.95rem;}
+    .info-text p {margin: 0;font-size: 0.88rem;line-height: 1.4;}
+
     /* Map section */
-    .map{background:#e5e8ee;border-radius:var(--radius);margin-top:24px;min-height:160px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    .map {margin-top: 24px;border-radius: var(--radius);overflow: hidden;box-shadow: var(--shadow);height: 260px;}
+    .map iframe {width: 100%;height: 100%;border: 0;}
+
 
     /* Footer */
     footer{background:var(--navy);color:#e7edf6;margin-top:40px}
@@ -69,11 +83,15 @@
       .contact-body{grid-template-columns:1fr}
       .footer-inner{grid-template-columns:1fr}
       .side-banner{display:none}
+      .info {align-items: center;text-align: center;}
+      .info-item {flex-direction: column;align-items: center;}
+      .info-icon {margin-bottom: 4px;}
+      .map {height: 300px;}
     }
   </style>
 </head>
 <body>
-  <site-header></site-header>
+  <div id="header"></div>
 
   <div class="frame">
     <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
@@ -90,28 +108,81 @@
           <button type="submit" class="btn-submit">Enviar Mensaje</button>
         </form>
         <div class="info">
-          <h4>Nuestra Información</h4>
-          <p><span class="icon">📍</span><b>Dirección:</b> Calle Radio 123, Ciudad Transmisión, CT 12345</p>
-          <p><span class="icon">📞</span><b>Teléfono:</b> +34 555 123 456<br>Línea del Estudio: +34 555 987 654</p>
-          <p><span class="icon">✉️</span><b>Correo Electrónico:</b><br>info@radiodj1015.com<br>estudio@radiodj1015.com</p>
-          <p><span class="icon">💬</span><b>WhatsApp:</b> +34 555 123 456</p>
-          <p><b>Síguenos</b></p>
+          <h3>Nuestra Información</h3><br>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <img src="img/ubicacion.png" alt="Ubicación">
+            </div>
+            <div class="info-text">
+              <strong>Dirección</strong>
+              <p>Calle Julio A Roca 1830, Sierras Bayas, CT 7403</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <img src="img/telefono.png" alt="Teléfono">
+            </div>
+            <div class="info-text">
+              <strong>Teléfono</strong>
+              <p>+54 2284 614456</p>
+              <p>Línea del Estudio: 492 092</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <img src="img/correo.png" alt="Correo">
+            </div>
+            <div class="info-text">
+              <strong>Correo Electrónico</strong>
+              <p>info@radiodj1015.com</p>
+              <p>estudio@radiodj1015.com</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <img src="img/chat.png" alt="WhatsApp">
+            </div>
+            <div class="info-text">
+              <strong>WhatsApp</strong>
+              <p>+54 2284 614456</p>
+            </div>
+          </div>
+
+          <p><h4>Síguenos en Redes</h4></p>
           <div class="social">
-            <a href="#">📘</a>
-            <a href="#">📷</a>
-            <a href="#">🐦</a>
-            <a href="#">▶</a>
-            <a href="#">🟢</a>
+            <a href="#"><img class="icons" src="img/facebook.png" alt=""></a>
+            <a href="#"><img class="icons" src="img/instagram.png" alt=""></a>
+            <a href="#"><img class="icons" src="img/twitter.png" alt=""></a>
+            <a href="#"><img class="icons" src="img/youtube.png" alt=""></a>
+            <a href="#"><img class="icons" src="img/spotify.png" alt=""></a>
           </div>
         </div>
       </div>
-      <div class="map">Mapa / Ubicación</div>
+
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199.3318967911931!2d-60.16052299025129!3d-36.93075044582682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95943fba220f5a9d%3A0xbfb50298836c3aa7!2sRadio%20DJ%20101.5!5e0!3m2!1ses-419!2sar!4v1765307487216!5m2!1ses-419!2sar"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+
     </section>
   </div>
 
-  <site-footer></site-footer>
+  <div id="footer"></div>
 
 <script type="module" src="js/componentes.js"></script>
+
+<!-- Notificaciones -->
+
+<script type="module" src="./js/notificaciones.js"></script>
 
 </body>
 </html>

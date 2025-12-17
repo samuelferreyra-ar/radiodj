@@ -14,10 +14,10 @@
 <body>
 
   <!-- Igual que en index -->
-  <site-header></site-header>
+  <div id="header"></div>
 
   <!-- Contenido de login -->
-  <main style="display:grid; place-items:center; min-height:calc(100dvh - 160px); padding:24px;">
+  <main style="display:grid; place-items:center; min-height:calc(100dvh - 160px); padding:3% 10%;">
     <div class="login-card">
       <div class="logo">RADIO DJ 101.5</div>
       <h1>Inicia Sesión</h1>
@@ -25,11 +25,11 @@
       <form id="loginForm">
         <div class="input-wrapper">
           <span class="icon">👤</span>
-          <input id="loginUserOrEmail" type="text" placeholder="Usuario o Email" required>
+          <input id="loginUserOrEmail" type="text" placeholder="Ingrese su e-mail" required>
         </div>
         <div class="input-wrapper">
           <span class="icon">🔒</span>
-          <input id="loginPassword" type="password" placeholder="Contraseña" required>
+          <input id="loginPassword" type="password" placeholder="Ingrese su contraseña" required>
         </div>
 
         <div class="checkbox-container">
@@ -42,17 +42,18 @@
 
       <div class="links">
         <a href="registro.html">Registrarse</a>
-        <a href="#">Ayuda</a>
+        <a href="ayuda.html">Ayuda</a>
       </div>
     </div>
   </main>
 
   <!-- Igual que en index -->
-  <site-footer></site-footer>
+  <div id="footer"></div>
 
   <!-- Scripts (módulos) -->
+   <script src="https://cdn.jsdelivr.net/npm/validator@13.11.0/validator.min.js"></script>
+   <script type="module" src="js/componentes.js"></script>
   <script type="module" src="js/firebase.js"></script>
   <script type="module" src="js/auth.js"></script>
-  <script type="module" src="js/componentes.js"></script>
 </body>
 </html>

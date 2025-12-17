@@ -6,10 +6,27 @@
   <title>RADIO DJ 101.5</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="footer.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    /* Contenedor de imagen */
+    .card .thumb{
+      height:160px;
+      overflow:hidden;           /* recorta lo que sobra */
+      border-radius:10px 10px 0 0; /* mismo radio que la card arriba */
+    }
+
+    /* Imagen */
+    .card .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;          /* recorta sin deformar */
+      display:block;
+    }
+  </style>
 </head>
 <body>
   
-<site-header></site-header>
+<div id="header"></div>
 
   <div class="frame">
     <aside class="side-banner left" aria-label="Publicidad"><span>PUBLICIDAD</span></aside>
@@ -60,40 +77,39 @@
 
     <section id="noticias" class="news-section" aria-labelledby="news-title">
       <h2 id="news-title">NOTICIAS LOCALES</h2>
-      <div class="cards">
-        <article class="card">
-          <div class="thumb"><div class="avatar" aria-hidden="true"></div></div>
-          <div class="card-body">
-            <h3>Titular de noticia local aquí</h3>
-            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="thumb"><div class="img2" aria-hidden="true"></div></div>
-          <div class="card-body">
-            <h3>Titular de noticia local aquí</h3>
-            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
-          </div>
-        </article>
-        <article class="card">
-          <div class="thumb"><div class="shape" aria-hidden="true"></div></div>
-          <div class="card-body">
-            <h3>Titular de noticia local aquí</h3>
-            <p>Descripción de la noticia local aquí. Este es un breve resumen del artículo que proporciona contexto.</p>
-          </div>
-        </article>
-      </div>
+      <div class="cards" id="indexNewsCards"></div>
     </section>
 
-<site-footer></site-footer>
+<div id="footer"></div>
 
   </div>
 
-  <!-- incluir en TODAS las páginas que usan auth/chat (al final del body) -->
+<!-- Importación de componentes -->
+
+<script type="module" src="js/componentes.js"></script>
+
+<!-- Notificaciones -->
+
+<script type="module" src="./js/notificaciones.js"></script>
+
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/chat.js"></script>
-<script type="module" src="js/componentes.js"></script>
 <script type="module" src="js/calendario.js"></script>
+<script type="module">
+  import { fetchNotasPublicas, renderCardIndex } from "./js/noticias-publicas.js";
+
+  const cont = document.getElementById("indexNewsCards");
+  if (cont) {
+    try {
+      // Últimas 3 LOCALES
+      const notas = await fetchNotasPublicas({ categoria: "local", take: 3 });
+      cont.innerHTML = notas.map(renderCardIndex).join("");
+    } catch (e) {
+      console.error("Index noticias:", e);
+      // fallback silencioso
+    }
+  }
+</script>
 
 </body>
 

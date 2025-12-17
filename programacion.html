@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RADIO DJ 101.5 - Programación</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
   <style>
     :root{
       --red:#d83c40;
@@ -68,7 +71,7 @@
   </style>
 </head>
 <body>
-  <site-header></site-header>
+  <div id="header"></div>
 
   <div class="frame">
     <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
@@ -96,15 +99,7 @@
                   <th>Presentador</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr><td>Lunes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
-                <tr><td>Lunes</td><td>9:00 - 12:00</td><td><b>Top 40 Countdown</b></td><td>Miguel Reyes</td></tr>
-                <tr><td>Lunes</td><td>12:00 - 15:00</td><td><b>Descanso para Almorzar</b></td><td>Luisa Chen</td></tr>
-                <tr><td>Martes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
-                <tr><td>Martes</td><td>9:00 - 12:00</td><td><b>Hora del Rock Clásico</b></td><td>Jaime Wilson</td></tr>
-                <tr><td>Miércoles</td><td>19:00 - 22:00</td><td><b>Noche de Jazz</b></td><td>Roberto Díaz</td></tr>
-                <tr><td>Jueves</td><td>20:00 - 23:00</td><td><b>Jueves de Nostalgia</b></td><td>Emma Torres</td></tr>
-                <tr><td>Viernes</td><td>21:00 - 00:00</td><td><b>Fiesta de Viernes</b></td><td>DJ Maxwell</td></tr>
+              <tbody id="publicProgBody">
               </tbody>
             </table>
           </div>
@@ -117,9 +112,13 @@
     </section>
   </div>
 
-  <site-footer></site-footer>
+  <div id="footer"></div>
 
 <script type="module" src="js/componentes.js"></script>
+
+
+<script type="module" src="js/programacion-publica.js"></script>
+
 
 </body>
 </html>
