@@ -196,13 +196,6 @@ loginForm.addEventListener("submit", async (e) => {
   const loginInput = (inputUserOrEmail.value || "").trim();
   const password = inputPass.value;
 
-  // --- FILTRO 1: Contraseña fuerte ---
-  const passCheck = validarPasswordLogin(password);
-  if (!passCheck.ok) {
-    alert(passCheck.msg);
-    return;
-  }
-
   // --- FILTRO 2: Dominio permitido si el usuario ingresó un email directo ---
   const pareceEmail = /\S+@\S+\.\S+/.test(loginInput);
   if (pareceEmail && !emailDominioPermitido(loginInput)) {
@@ -387,6 +380,7 @@ if (resetForm) {
         url: "https://samuelferreyra-ar.github.io/radiodj/reset_password.html",
         handleCodeInApp: true
       });
+
       alert("Te enviamos un enlace para restablecer la contraseña. Revisá tu correo.");
       setTimeout(() => {
         window.location.href = "login.html";
@@ -404,4 +398,3 @@ if (resetForm) {
     }
   });
 }
-

@@ -21,9 +21,12 @@ if (!oobCode || mode !== "resetPassword") {
   msg("Enlace inválido o incompleto.");
 } else {
   // Verifica que el código sea válido y te devuelve el email asociado
-  verifyPasswordResetCode(auth, oobCode)
+  let resetEmail = "";
+
+    verifyPasswordResetCode(auth, oobCode)
     .then((email) => {
-      msg(`Código válido para: ${email}`, true);
+        resetEmail = email;
+        msg(`Código válido para: ${email}`, true);
     })
     .catch((err) => {
       console.error("[verifyPasswordResetCode]", err);
@@ -39,6 +42,7 @@ $("#confirmResetForm")?.addEventListener("submit", async (e) => {
   if (!oobCode) return msg("Falta el código del enlace.");
   if (p1.length < 6) return msg("La contraseña debe tener al menos 6 caracteres.");
   if (p1 !== p2) return msg("Las contraseñas no coinciden.");
+  if (!resetEmail) return msg("El enlace aún no fue validado o es inválido.");
 
   try {
     await confirmPasswordReset(auth, oobCode, p1);
