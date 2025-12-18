@@ -383,7 +383,10 @@ if (resetForm) {
     if (!email) return alert("Ingresá tu email");
 
     try {
-      await sendPasswordResetEmail(auth, email /*, { url: 'https://TU-DOMINIO/index.html' } */);
+      await sendPasswordResetEmail(auth, email, {
+        url: "https://samuelferreyra-ar.github.io/radiodj/reset_password.html",
+        handleCodeInApp: true
+      });
       alert("Te enviamos un enlace para restablecer la contraseña. Revisá tu correo.");
       setTimeout(() => {
         window.location.href = "login.html";
@@ -401,3 +404,4 @@ if (resetForm) {
     }
   });
 }
+
