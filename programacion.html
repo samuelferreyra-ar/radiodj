@@ -68,6 +68,58 @@
       .footer-inner{grid-template-columns:1fr}
       .side-banner{display:none}
     }
+    /* Ultra mobile (<= 450px) */
+    @media (max-width: 450px){
+
+      /* reduce padding general para que no "coma" tanto ancho */
+      .frame{ padding: 18px 12px; }
+
+      /* reduce espacios internos */
+      .program-body{ padding: 14px; gap: 14px; }
+
+      /* tabla: scroll horizontal suave sin romper el layout */
+      .program-table{
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* evita que el contenido fuerce ancho extra */
+      table{ min-width: 520px; } /* ajustalo a gusto */
+
+      /* BOTONES: el punto clave */
+      .buttons{
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn{
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    html, body { overflow-x: hidden; }
+    .program-body > * { min-width: 0; }
+    /* FIX: en CSS Grid, los items no encogen por min-width:auto */
+.program-body > * { min-width: 0; }
+
+@media (max-width: 450px){
+  .frame{ padding: 18px 12px; }
+  .program-body{ grid-template-columns: 1fr; padding: 14px; gap: 14px; }
+
+  /* el contenedor sí puede encoger y habilita scroll interno */
+  .program-table{
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* opcional: que la tabla pueda ser más ancha que el contenedor */
+  table{ min-width: 520px; }
+
+  .buttons{ flex-wrap: wrap; gap: 10px; }
+  .btn{ flex: 1 1 100%; width: 100%; }
+}
+
   </style>
 </head>
 <body>
