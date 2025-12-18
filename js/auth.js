@@ -377,9 +377,10 @@ if (resetForm) {
 
     try {
       await sendPasswordResetEmail(auth, email, {
-        url: "https://samuelferreyra-ar.github.io/radiodj/reset_password.html",
-        handleCodeInApp: true
+        url: "https://samuelferreyra-ar.github.io/radiodj/login.html",
+        handleCodeInApp: false
       });
+
 
       alert("Te enviamos un enlace para restablecer la contraseña. Revisá tu correo.");
       setTimeout(() => {
