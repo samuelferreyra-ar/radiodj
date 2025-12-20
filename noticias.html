@@ -4,28 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RADIO DJ 101.5 - Noticias</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
   <style>
-    :root{
-      --red:#d83c40;
-      --navy:#1e3550;
-      --bg:#f2f4f7;
-      --text:#1a1f29;
-      --muted:#6b7789;
-      --radius:12px;
-      --shadow:0 6px 12px rgba(0,0,0,.08);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
-    a{text-decoration:none;color:inherit}
-
-    /* Header */
-    .topbar{background:var(--red);color:#fff;padding:14px 24px;position:sticky;top:0;z-index:50}
-    .topbar .wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800}
-    nav ul{display:flex;gap:20px;list-style:none}
-    nav a{font-weight:600;opacity:.95}
-    nav a:hover{text-decoration:underline;opacity:1}
-
     /* Layout */
     .frame{max-width:1100px;margin:0 auto;position:relative;padding:32px 24px}
     .side-banner{position:absolute;top:64px;bottom:0;width:38px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:8px}
@@ -46,7 +29,17 @@
     /* Noticias grid */
     .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
     .card{background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-    .thumb{background:#e9edf2;height:160px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:2rem}
+    .thumb{
+      height:160px;
+      background:#e9edf2;
+    }
+    .thumb img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+    }
+
     .card-body{padding:16px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
     .badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:.75rem;font-weight:600;margin-bottom:8px;color:#fff}
     .badge.local{background:#d83c40}
@@ -62,32 +55,32 @@
     .comments b{color:var(--text)}
     .comments span{display:block;color:var(--muted);margin-left:8px;font-size:.82rem}
 
-    /* Footer */
-    footer{background:var(--navy);color:#e7edf6;margin-top:40px}
-    .footer-inner{max-width:1100px;margin:0 auto;padding:36px 24px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
-    footer h4{margin-bottom:12px;color:#fff}
-    .links{display:grid;gap:8px}
-    .btn-live{background:#ef4452;color:#fff;font-weight:700;border:none;border-radius:999px;padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-    .badges{display:flex;gap:8px;margin-top:10px}
-    .badge-store{border:1px solid #9fb1c6;border-radius:6px;padding:6px 10px;font-size:.82rem}
-    .badge1{display:inline-flex; align-items:center; gap:6px; background-color: black; border-radius:8px; padding:8px 10px; font-size:.82rem}
-    .badge2{display:inline-flex; align-items:center; gap:6px; background-color: green; border-radius:8px; padding:8px 10px; font-size:.82rem}
-    .copyright{text-align:center;border-top:1px solid rgba(255,255,255,.2);padding:14px 0;margin-top:20px;font-size:.85rem}
-
     /* Responsive */
     @media(max-width:900px){
       .footer-inner{grid-template-columns:1fr}
       .side-banner{display:none}
     }
+    /* Contenedor de imagen */
+    .card .thumb{
+      height:160px;
+      overflow:hidden;           /* recorta lo que sobra */
+      border-radius:10px 10px 0 0; /* mismo radio que la card arriba */
+    }
+
+    /* Imagen */
+    .card .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;          /* recorta sin deformar */
+      display:block;
+    }
   </style>
 </head>
 <body>
   
-  <site-header></site-header>
+  <div id="header"></div>
 
   <div class="frame">
-    <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
-    <aside class="side-banner right"><span>PUBLICIDAD</span></aside>
 
     <section class="news-card">
       <div class="news-header">NOTICIAS</div>
@@ -96,82 +89,162 @@
         <div class="tab" data-category="local">Locales</div>
         <div class="tab" data-category="internacional">Internacionales</div>
         <div class="tab" data-category="musica">Música</div>
-        <div class="tab" data-category="cultura">Cultura</div>
       </div>
-
-      <div class="news-grid">
-        <article class="card" data-category="local">
-          <div class="thumb"></div>
-          <div class="card-body">
-            <span class="badge local">Local</span>
-            <h3>Ayuntamiento aprueba desarrollo de nuevo parque</h3>
-            <p>El ayuntamiento ha aprobado por unanimidad la financiación para un nuevo parque comunitario en el centro de la ciudad.</p>
-            <span class="read-more">Leer Más</span>
-            <div class="comments">
-              <b>Comentarios (3)</b>
-              <span><b>Juan D.:</b> ¡Excelentes noticias para nuestra comunidad!</span>
-              <span><b>Sara M.:</b> Espero que incluyan un área para perros.</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-category="internacional">
-          <div class="thumb"></div>
-          <div class="card-body">
-            <span class="badge internacional">Internacional</span>
-            <h3>Cumbre Climática Global alcanza nuevo acuerdo</h3>
-            <p>Los líderes mundiales han llegado a un acuerdo histórico sobre la reducción de emisiones de carbono en la cumbre climática anual.</p>
-            <span class="read-more">Leer Más</span>
-            <div class="comments">
-              <b>Comentarios (5)</b>
-              <span><b>María L.:</b> ¡Por fin buenas noticias!</span>
-              <span><b>David R.:</b> Necesitamos más acción, no solo acuerdos.</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-category="musica">
-          <div class="thumb"></div>
-          <div class="card-body">
-            <span class="badge musica">Música</span>
-            <h3>Banda local lanza álbum debut con aclamación crítica</h3>
-            <p>Los héroes locales "Las Ondas Sonoras" han lanzado su primer álbum con excelentes críticas.</p>
-            <span class="read-more">Leer Más</span>
-            <div class="comments">
-              <b>Comentarios (7)</b>
-              <span><b>Alex T.:</b> ¡Los sigo desde su primer concierto!</span>
-              <span><b>Jaime K.:</b> La tercera canción es absolutamente increíble.</span>
-            </div>
-          </div>
-        </article>
-      </div>
+    <div class="news-grid" id="newsGrid"></div>
     </section>
   </div>
 
-  <site-footer></site-footer>
+  <div id="footer"></div>
 
-  <script>
-    const tabs = document.querySelectorAll('.tab');
-    const cards = document.querySelectorAll('.card');
+<!-- Modal Nota Completa -->
+<div id="notaModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notaModalTitle">
+  <div class="modal-overlay" data-act="close"></div>
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+  <div class="modal-dialog" role="document">
+    <button class="modal-close" aria-label="Cerrar" data-act="close">✕</button>
 
-        const category = tab.getAttribute('data-category');
-        cards.forEach(card => {
-          if(category === 'all' || card.dataset.category === category){
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
+    <div class="modal-head">
+      <h2 id="notaModalTitle"></h2>
+      <div class="modal-meta">
+        <span id="notaModalBadge" class="badge local">Local</span>
+        <span id="notaModalDate" class="muted"></span>
+      </div>
+    </div>
+
+    <div class="modal-thumb">
+      <img id="notaModalImg" alt="" loading="lazy"
+           onerror="this.onerror=null;this.src='404.png';">
+    </div>
+
+    <div id="notaModalBody" class="modal-body"></div>
+  </div>
+</div>
+
+  <script type="module">
+  import { fetchNotasPublicas, renderCardNoticias } from "./js/noticias-publicas.js";
+
+  const grid = document.getElementById("newsGrid");
+  const tabs = document.querySelectorAll(".tab");
+  let all = [];
+
+  function applyFilter(cat){
+    const cards = grid.querySelectorAll(".card");
+    cards.forEach(card => {
+      const c = card.dataset.category;
+      card.style.display = (cat === "all" || c === cat) ? "flex" : "none";
     });
-  </script>
+  }
+
+  async function load(){
+    try{
+      all = await fetchNotasPublicas(); // todas publicadas
+      grid.innerHTML = all.map(renderCardNoticias).join("");
+
+      // Si querés luego abrir una nota completa, acá engancharías “Leer Más”
+      function badgeClass(cat){
+  if (cat === "local") return "local";
+  if (cat === "internacional") return "internacional";
+  if (cat === "musica") return "musica";
+  return "local";
+}
+function badgeLabel(cat){
+  if (cat === "local") return "Local";
+  if (cat === "internacional") return "Internacional";
+  if (cat === "musica") return "Música";
+  return "Nota";
+}
+
+function openModal(nota){
+  const modal = document.getElementById("notaModal");
+  const title = document.getElementById("notaModalTitle");
+  const body  = document.getElementById("notaModalBody");
+  const img   = document.getElementById("notaModalImg");
+  const badge = document.getElementById("notaModalBadge");
+  const date  = document.getElementById("notaModalDate");
+
+  if(!modal || !title || !body || !img || !badge) return;
+
+  const cat = (nota.categoria || "local").toString();
+  title.textContent = nota.titulo || "";
+
+  // Imagen (con fallback)
+  img.src = (nota.imagenUrl || "").trim() || "404.png";
+  img.alt = nota.titulo || "Noticia";
+
+  // Badge
+  badge.className = `badge ${badgeClass(cat)}`;
+  badge.textContent = badgeLabel(cat);
+
+  // Fecha (opcional: usa updatedAt si existe)
+  try{
+    const ts = nota.updatedAt?.toDate ? nota.updatedAt.toDate() : null;
+    date.textContent = ts ? ts.toLocaleDateString() : "";
+  }catch{
+    date.textContent = "";
+  }
+
+  // Cuerpo (HTML permitido según tu editor)
+  // Si querés que sea texto plano por seguridad, avisame y lo sanitizamos.
+  body.innerHTML = (nota.cuerpo || "").toString();
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  const modal = document.getElementById("notaModal");
+  if(!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+// Delegación: 1 solo listener para toda la grilla
+grid.addEventListener("click", (e)=>{
+  const btn = e.target.closest('[data-act="leer"]');
+  if(!btn) return;
+  const id = btn.getAttribute("data-id");
+  const nota = all.find(n => n.id === id);
+  if(nota) openModal(nota);
+});
+
+// Cierres del modal
+document.addEventListener("click", (e)=>{
+  const modal = document.getElementById("notaModal");
+  if(!modal || !modal.classList.contains("open")) return;
+  if(e.target.matches("[data-act='close']")) closeModal();
+});
+
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "Escape") closeModal();
+});
+
+
+      applyFilter("all");
+    }catch(e){
+      console.error("Noticias load:", e);
+    }
+  }
+
+  tabs.forEach(tab=>{
+    tab.addEventListener("click", ()=>{
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      applyFilter(tab.getAttribute("data-category"));
+    });
+  });
+
+  load();
+</script>
+  
+<!-- Importación de componentes -->
 
 <script type="module" src="js/componentes.js"></script>
+
+<!-- Notificaciones -->
+
+<script type="module" src="./js/notificaciones.js"></script>
 
 </body>
 </html>

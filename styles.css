@@ -51,6 +51,18 @@
     .cards{max-width:1100px; margin:0 auto; padding:0 24px 8px; display:grid; grid-template-columns:repeat(3, 1fr); gap:22px}
     .card{background:#f1f3f7; border-radius:14px; padding:0; box-shadow:0 10px 0 rgba(0,0,0,.18); border:6px solid rgba(0,0,0,.1)}
     .thumb{background:#d9dee6; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb1{background-image: url(img/locales.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb12{background-image: url(img/locales2.jpeg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb13{background-image: url(img/locales3.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb14{background-image: url(img/locales4.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb2{background-image: url(img/internacional.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb21{background-image: url(img/internacional1.png); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb22{background-image: url(img/internacional2.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb23{background-image: url(img/internacional3.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb3{background-image: url(img/musica.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb31{background-image: url(img/musica1.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb32{background-image: url(img/musica2.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
+    .thumb33{background-image: url(img/musica3.jpg); background-size: cover; border-top-left-radius:8px; border-top-right-radius:8px; height:130px; display:grid; place-items:center}
     .thumb .avatar{width:72px; height:72px; border-radius:50%; background:linear-gradient(#cfd6df,#b8c1cc); box-shadow:inset 0 8px 12px rgba(0,0,0,.08)}
     .thumb .img2{width:90px; height:52px; border-radius:6px; background:linear-gradient(#cfd6df,#b8c1cc)}
     .thumb .shape{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:60px solid #c7cfda;border-radius:4px}
@@ -83,7 +95,6 @@
       .footer-inner{grid-template-columns:1fr;}
       nav ul{gap:14px}
     }
-
     .register-card{
   background:var(--card);
   border-radius:var(--radius);
@@ -97,7 +108,7 @@
 .register-card::before{
   content:"";
   position:absolute;
-  top:0; left:0; width:100%; height:50%;
+  top:0; left:0; width:100%; height:22%;
   background:linear-gradient(90deg,#3a2f4f 0%, #a33448 50%, #c83b40 100%);
   border-top-left-radius:var(--radius);
   border-top-right-radius:var(--radius);
@@ -170,7 +181,7 @@
 .login-card::before{
   content:"";
   position:absolute;
-  top:0; left:0; width:100%; height:50%;
+  top:0; left:0; width:100%; height:30%;
   background:linear-gradient(90deg,#3a2f4f 0%, #a33448 50%, #c83b40 100%);
   border-top-left-radius:var(--radius);
   border-top-right-radius:var(--radius);
@@ -278,8 +289,11 @@
   margin-bottom:20px;
   position:relative;
   z-index:1;
+  padding-bottom: 1rem;
 }
-.reset-card form{position:relative; z-index:1;}
+.reset-card form{
+  padding-top: 1rem;
+  position:relative; z-index:1;}
 .reset-card input[type="email"]{
   width:100%;
   padding:14px 16px 14px 40px;
@@ -340,8 +354,8 @@
   overflow: hidden;
 }
 .chat-header {
-  background: rgba(255,255,255,.08);
-  color: #fff;
+  background: #2a2f36; /* gris oscuro */
+  color: #e7edf6;
   padding: 12px 16px;
   font-weight: 800;
   letter-spacing: .6px;
@@ -359,6 +373,7 @@
 .msg {
   background: #1a2330;
   border: 1px solid rgba(255,255,255,.08);
+  border-left: 4px solid var(--msg-accent, #ef4452); /* color único por usuario */
   border-radius: 12px;
   padding: 8px 10px;
   max-width: 90%;
@@ -452,3 +467,474 @@
   border:1px solid #e8edf4; border-radius:10px; padding:10px; background:#f9fbfd;
 }
 .prog-empty{ color:var(--muted) }
+
+/* ==== NOTIFICACIONES SOLO PARA ADMIN ==== */
+
+/* Botón campanita */
+.notif-btn{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;           /* ajustá a la altura de tu navbar */
+  width: 40px;            /* cuadrado */
+  border-radius: 10px;    /* bordes redondeados */
+  border: 1px solid #e5e9ef;
+  background: #fff;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: box-shadow .2s, transform .03s;
+}
+.notif-btn:hover{ box-shadow: 0 3px 10px rgba(0,0,0,.07); }
+.notif-btn:active{ transform: translateY(1px); }
+.notif-btn .bi{ font-size: 1.1rem; }
+
+/* Punto indicador (nuevas notificaciones) */
+.notif-badge{
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 9px;
+  height: 9px;
+  background: #e53935; /* rojo */
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Dropdown flotante */
+.notif-dropdown{
+  position: absolute;
+  right: 12px;               /* ajustá según tu layout */
+  top: calc(60px);           /* bajo la barra; ajustá a tu navbar */
+  width: 320px;
+  background: #fff;
+  border: 1px solid #e5e9ef;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  overflow: hidden;
+  z-index: 1000;
+}
+.notif-hd, .notif-ft{
+  padding: 10px 12px;
+  background: #f7f9fc;
+}
+.notif-list{
+  max-height: 360px;
+  overflow-y: auto;
+}
+.notif-item{
+  padding: 10px 12px;
+  border-top: 1px solid #f0f2f6;
+}
+.notif-item:first-child{ border-top: none; }
+.notif-title{ font-weight: 700; }
+.notif-meta{ font-size: .9rem; color: #6b7280; }
+.notif-link{ display: inline-block; color: #1f6feb; }
+
+/* Opcional: si tu navbar es position:relative, asegurá stacking */
+.navbar, header{ position: relative; z-index: 10; }
+/* Para que el dropdown se posicione relativamente al header */
+.topbar .wrap { position: relative; }
+
+/* Si preferís colgarlo del <li>, también funciona: */
+.notif-li { position: relative; }
+
+/* Si lo dejás como hermano de <nav>, usa el contexto de .wrap */
+.notif-dropdown{
+  position: absolute;
+  right: 12px;                 /* ajustá según alineación */
+  top: calc(100% + 8px);       /* justo debajo del header */
+}
+
+/* -------------------
+   CAMBIOS V12
+-------------------- */
+
+/* -------------------
+   HEADER GENERAL
+-------------------- */
+.topbar .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.topbar .brand {
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+/* -------------------
+   NAV DESKTOP
+-------------------- */
+.nav-menu ul {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* -------------------
+   BOTÓN HAMBURGUESA
+-------------------- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-toggle .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+/* -------------------
+   CAMPANITA
+-------------------- */
+.notif-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #e5e9ef;
+  border-radius: 10px;
+  background: #fff;
+  line-height: 1;
+}
+.notif-btn .bi {
+  font-size: 1.1rem;
+  color: #1f2937;
+}
+.notif-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 9px;
+  height: 9px;
+  background: #e53935;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* -------------------
+   MOBILE (≤900px)
+-------------------- */
+@media (max-width: 900px) {
+  /* Muestra hamburguesa y mantiene campanita a su derecha */
+  .nav-toggle {
+    display: block;
+  }
+
+  /* Oculta el menú en línea */
+  .nav-menu{
+    position: absolute;
+    top: calc(100% + 8px);   /* debajo del header */
+    right: 12px;             /* pegado al borde derecho */
+    left: auto;              /* no ocupar todo el ancho */
+    width: clamp(260px, 88vw, 360px);  /* ANGOSTO y responsivo */
+    background: rgba(11, 15, 20, 0.95);
+    color: #fff;
+    backdrop-filter: blur(12px);
+    border-radius: 12px;     /* 🔸 redondeado en TODAS las esquinas (incluye arriba) */
+    box-shadow: 0 12px 32px rgba(0,0,0,.25);
+
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all .2s ease;
+    z-index: 999;
+  }
+  .nav-menu ul{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 10px;
+    margin: 0;
+  }
+  .nav-menu li {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav-menu li:first-child {
+    border-top: none;
+  }
+  .nav-menu a {
+    display: block;
+    padding: 14px 8px;
+  }
+
+  /* Estado abierto */
+  .nav-menu[data-open="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Campanita visible junto al toggle, tamaño fijo */
+  .nav-actions {
+    margin-left: auto;
+  }
+  .notif-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Dropdown sigue colgando del header */
+  .notif-dropdown {
+    right: 12px;
+    top: calc(100% + 8px);
+  }
+}
+
+.account-wrap{max-width:1100px;margin:24px auto;padding:0 24px 48px}
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+  .tab-btn{
+    background:var(--card); border:1px solid rgba(0,0,0,.08);
+    padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:800;
+  }
+  .tab-btn[aria-selected="true"]{ background:#fff; box-shadow:var(--shadow); }
+  .panel{display:none; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+  .panel.active{display:block}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom: 15px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  .grid6{display:grid; grid-template-columns:repeat(6,1fr); gap:8px}
+  .field{display:flex; flex-direction:column; gap:6px}
+  .field input, .field select, .field textarea{
+    padding:10px 12px; border-radius:10px; border:1px solid #ccc; outline:none;
+  }
+
+  .table-responsive {width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */}
+  .table th, .table td{padding:10px 12px; border-bottom:1px solid #e5e9ef; font-size:.92rem; text-align: left;}
+  .table th{text-align:left; background:#f7f9fc; font-weight:800}
+  .row-actions{display:flex; gap:8px}
+  .danger{background:#9b2226}
+  .danger:hover{background:#7e1c1f}
+  @media (max-width:900px){ .grid2{grid-template-columns:1fr} .grid3{grid-template-columns:1fr} .grid6{grid-template-columns:1fr 1fr} }
+  /* Soporte */
+.accordion-case{border:1px solid #e5e9ef; border-radius:12px; background:#fff; margin-bottom:8px; overflow:hidden}
+.accordion-hd{width:100%; text-align:left; padding:12px 14px; font-weight:800; background:#f7f9fc; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 4px;}
+.accordion-bd{padding:12px 14px; display: none;}
+.accordion-hd span {display: inline-block; word-break: break-word;}
+.accordion-case.open .accordion-bd{display:block}
+.case-row{display:grid; grid-template-columns:140px 1fr; gap:8px; margin:6px 0}
+.case-row .k{color:var(--muted); font-weight:700}
+.case-actions{display:flex; justify-content: flex-end; gap:8px; margin-top:12px; flex-wrap: wrap;}
+.sel-estado{padding:8px 10px; border-radius:10px; border:1px solid #ccc}
+
+@media (max-width: 700px) {.case-row {grid-template-columns: 1fr;}.case-row .k {margin-bottom: 4px;}.accordion-hd {flex-direction: column;align-items: flex-start;}.accordion-hd span:last-child {align-self: flex-end;}.case-actions {justify-content: center;}}
+
+/* Notificaciones: forzar contraste y tokens del sitio */
+.notif-dropdown{
+  background: #fff;
+  color: #1f2937;              /* texto oscuro */
+  border: 1px solid #e5e9ef;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+}
+
+.notif-hd, .notif-ft{
+  background: #f7f9fc;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e9ef;
+}
+.notif-ft{ border-top: 1px solid #e5e9ef; border-bottom: 0; }
+
+.notif-list{ background: #fff; }
+
+.notif-item{ border-top: 1px solid #f0f2f6; }
+.notif-item:first-child{ border-top: none; }
+
+.notif-title{ font-weight: 700; color: #111827; }  /* más oscuro para títulos */
+.notif-meta{ font-size: .9rem; color: #6b7280; }   /* gris medio */
+.notif-link{ color: #1f6feb; text-decoration: none; }
+.notif-link:hover{ text-decoration: underline; }
+.case-highlight{ box-shadow:0 0 0 3px rgba(198,40,40,.25), 0 6px 24px rgba(0,0,0,.12); transition: box-shadow .2s; }
+/* Fix visual dropdown notificaciones */
+.notif-list { padding: 4px 0; }               /* un respiro vertical */
+
+.notif-item{
+  display: block;                             /* que ocupe todo el ancho */
+  width: 100%;
+  padding: 10px 12px;                         /* ya lo tenías, lo reafirmo aquí */
+  border-top: 1px solid #f0f2f6;              /* línea completa */
+  color: inherit;
+  text-decoration: none;
+}
+.notif-item:first-child{ border-top: none; }
+.notif-item:hover{ background: #f7f9fc; }     /* feedback sutil al hover */
+
+/* donde tengas tus estilos, o agrega un <style> */
+.row-invalid input { outline: 2px solid #d83c40; }
+
+.msg--deleted .text {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.msg-delete-btn {
+  margin-left: 8px;
+  font-size: 0.7rem;
+  border: none;
+  border-radius: 999px;
+  padding: 2px 8px;
+  cursor: pointer;
+  background: #f97373;
+  color: #fff;
+}
+
+.msg-delete-btn:hover {
+  background: #e02424;
+}
+/* ===== HERO responsive: video arriba, chat abajo ===== */
+.hero-inner{
+  gap: 24px;
+}
+
+/* Desktop: dos columnas */
+@media (min-width: 901px){
+  .hero-inner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Mobile/tablet: apilar */
+@media (max-width: 900px){
+  .hero-inner{
+    display: flex;
+    flex-direction: column;     /* 👈 video arriba, chat abajo */
+    align-items: stretch;       /* 👈 ocupar ancho */
+    justify-content: flex-start;
+  }
+
+  /* El iframe debe ser responsivo */
+  .hero-inner iframe{
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;       /* 👈 mantiene proporción */
+    max-width: 100%;
+  }
+
+  /* El chat no debe “forzar” ancho */
+  .live-chat{
+    max-width: 100%;
+  }
+
+  /* Mensajes un poco más altos en mobile para que no quede apretado */
+  .chat-messages{
+    height: 320px;
+  }
+}
+
+/* ===== Modal Nota ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:9999;
+}
+
+.modal.open{ display:block; }
+
+.modal-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+}
+
+.modal-dialog{
+  position:relative;
+  width:min(860px, calc(100vw - 24px));
+  max-height:calc(100vh - 24px);
+  margin:12px auto;
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+}
+
+.modal-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:38px;
+  height:38px;
+  border:none;
+  border-radius:10px;
+  background:rgba(0,0,0,.08);
+  cursor:pointer;
+  font-weight:900;
+}
+
+.modal-head{
+  padding:18px 18px 10px 18px;
+}
+
+.modal-head h2{
+  margin:0 0 8px 0;
+  color:var(--text);
+}
+
+.modal-meta{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.modal-thumb{
+  height:260px;
+  overflow:hidden;
+  background:#e9edf2;
+}
+
+.modal-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.modal-body{
+  padding:16px 18px 18px 18px;
+  overflow:auto;
+  color:var(--text);
+  line-height:1.55;
+}
+
+/* que el contenido largo no rompa */
+.modal-body img{
+  max-width:100%;
+  height:auto;
+  border-radius:12px;
+}

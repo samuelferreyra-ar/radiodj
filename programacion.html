@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RADIO DJ 101.5 - Programación</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="footer.css">
   <style>
     :root{
       --red:#d83c40;
@@ -65,26 +69,88 @@
       .footer-inner{grid-template-columns:1fr}
       .side-banner{display:none}
     }
+    /* Ultra mobile (<= 450px) */
+    @media (max-width: 450px){
+
+      /* reduce padding general para que no "coma" tanto ancho */
+      .frame{ padding: 18px 12px; }
+
+      /* reduce espacios internos */
+      .program-body{ padding: 14px; gap: 14px; }
+
+      /* tabla: scroll horizontal suave sin romper el layout */
+      .program-table{
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* evita que el contenido fuerce ancho extra */
+      table{ min-width: 520px; } /* ajustalo a gusto */
+
+      /* BOTONES: el punto clave */
+      .buttons{
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn{
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    html, body { overflow-x: hidden; }
+    .program-body > * { min-width: 0; }
+    /* FIX: en CSS Grid, los items no encogen por min-width:auto */
+.program-body > * { min-width: 0; }
+
+@media (max-width: 450px){
+  .frame{ padding: 18px 12px; }
+  .program-body{ grid-template-columns: 1fr; padding: 14px; gap: 14px; }
+
+  /* el contenedor sí puede encoger y habilita scroll interno */
+  .program-table{
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* opcional: que la tabla pueda ser más ancha que el contenedor */
+  table{ min-width: 520px; }
+
+  .buttons{ flex-wrap: wrap; gap: 10px; }
+  .btn{ flex: 1 1 100%; width: 100%; }
+}
+.program-image{
+  background:#F8F7F5;
+  border-radius:var(--radius);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:160px;
+  overflow:hidden;
+}
+
+.program-image img{
+  width:130%;
+  height:130%;
+  object-fit:contain;        /* 🔑 mantiene proporción */
+  display:block;
+}
+
   </style>
 </head>
 <body>
-  <site-header></site-header>
+  <div id="header"></div>
 
   <div class="frame">
-    <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
-    <aside class="side-banner right"><span>PUBLICIDAD</span></aside>
 
     <section class="program-card">
       <div class="program-header">PROGRAMACIÓN SEMANAL</div>
       <div class="program-body">
         <div class="program-image" aria-hidden="true">
-          <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="120" height="80" rx="10" fill="#cfd6df"/>
-            <circle cx="40" cy="40" r="18" fill="#b8c1cc"/>
-            <rect x="68" y="24" width="36" height="12" rx="4" fill="#b8c1cc"/>
-            <rect x="68" y="44" width="28" height="10" rx="3" fill="#b8c1cc"/>
-          </svg>
+          <img src="img/logodj.jpeg" alt="">
         </div>
+        
         <div>
           <div class="program-table">
             <table>
@@ -96,30 +162,29 @@
                   <th>Presentador</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr><td>Lunes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
-                <tr><td>Lunes</td><td>9:00 - 12:00</td><td><b>Top 40 Countdown</b></td><td>Miguel Reyes</td></tr>
-                <tr><td>Lunes</td><td>12:00 - 15:00</td><td><b>Descanso para Almorzar</b></td><td>Luisa Chen</td></tr>
-                <tr><td>Martes</td><td>6:00 - 9:00</td><td><b>Vibraciones Matutinas</b></td><td>Sara Jiménez</td></tr>
-                <tr><td>Martes</td><td>9:00 - 12:00</td><td><b>Hora del Rock Clásico</b></td><td>Jaime Wilson</td></tr>
-                <tr><td>Miércoles</td><td>19:00 - 22:00</td><td><b>Noche de Jazz</b></td><td>Roberto Díaz</td></tr>
-                <tr><td>Jueves</td><td>20:00 - 23:00</td><td><b>Jueves de Nostalgia</b></td><td>Emma Torres</td></tr>
-                <tr><td>Viernes</td><td>21:00 - 00:00</td><td><b>Fiesta de Viernes</b></td><td>DJ Maxwell</td></tr>
+              <tbody id="publicProgBody">
               </tbody>
             </table>
           </div>
           <div class="buttons">
-            <button class="btn primary">Descargar Horario</button>
-            <button class="btn secondary">Escuchar En Vivo</button>
+            <a href="index.html" class="btn secondary">Escuchar En Vivo</a>
           </div>
         </div>
       </div>
     </section>
   </div>
 
-  <site-footer></site-footer>
+  <div id="footer"></div>
 
 <script type="module" src="js/componentes.js"></script>
+
+
+<!-- Notificaciones -->
+
+<script type="module" src="./js/notificaciones.js"></script>
+
+<script type="module" src="js/programacion-publica.js"></script>
+
 
 </body>
 </html>

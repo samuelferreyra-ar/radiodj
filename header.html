@@ -1,0 +1,38 @@
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">RADIO DJ 101.5</a>
+
+    <!-- Contenedor para menú + acciones -->
+    <div class="nav-actions">
+      <!-- Botón hamburguesa -->
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      
+    </div>
+
+    <nav aria-label="Principal" id="navMenu" class="nav-menu" data-open="false">
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="programacion.html">PROGRAMACIÓN</a></li>
+        <li><a href="noticias.html">NOTICIAS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+        <li><a href="ayuda.html">AYUDA</a></li>
+        <li><a href="login.html" class="account-btn" id="linkCuenta">CUENTA</a></li>
+        
+      </ul>
+    </nav>
+
+    <!-- Campanita de notificaciones (fuera del menú) -->
+      <button id="btn-notifs" class="notif-btn" aria-label="Notificaciones" hidden>
+        <i class="bi bi-bell"></i>
+        <span class="notif-badge" id="notif-badge" hidden></span>
+      </button>
+    <!-- Dropdown de notificaciones -->
+    <div id="notif-dropdown" class="notif-dropdown" hidden>
+      <div class="notif-hd"><strong>Notificaciones</strong></div>
+      <div id="notif-list" class="notif-list"></div>
+    </div>
+  </div>
+</header>

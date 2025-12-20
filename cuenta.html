@@ -4,57 +4,45 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mi Cuenta - RADIO DJ 101.5</title>
+<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="styles.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <style>
-  /* ===== Estilos locales para las pestañas y paneles (respeta tu paleta) ===== */
-  .account-wrap{max-width:1100px;margin:24px auto;padding:0 24px 48px}
-  .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
-  .tab-btn{
-    background:var(--card); border:1px solid rgba(0,0,0,.08);
-    padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:800;
-  }
-  .tab-btn[aria-selected="true"]{ background:#fff; box-shadow:var(--shadow); }
-  .panel{display:none; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
-  .panel.active{display:block}
-
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-  .grid6{display:grid; grid-template-columns:repeat(6,1fr); gap:8px}
-  .field{display:flex; flex-direction:column; gap:6px}
-  .field input, .field select, .field textarea{
-    padding:10px 12px; border-radius:10px; border:1px solid #ccc; outline:none;
-  }
+  /* ===== Estilos específicos para no chocar con globales ===== */
   .btn{
     background:var(--red); color:#fff; border:none; border-radius:10px; padding:10px 14px;
     font-weight:800; cursor:pointer;
   }
   .btn:hover{ background:var(--red-dark); }
   .muted{color:var(--muted)}
-  .table{width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden}
-  .table th, .table td{padding:10px 12px; border-bottom:1px solid #e5e9ef; font-size:.92rem}
-  .table th{text-align:left; background:#f7f9fc; font-weight:800}
-  .row-actions{display:flex; gap:8px}
-  .danger{background:#9b2226}
-  .danger:hover{background:#7e1c1f}
-  @media (max-width:900px){ .grid2{grid-template-columns:1fr} .grid3{grid-template-columns:1fr} .grid6{grid-template-columns:1fr 1fr} }
+  .table{width:100%;  min-width: 800px; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden}
+  .row-invalid input { outline: 2px solid #d83c40; }
+  /* ===== Notas: lista prolija ===== */
+  #listaNotas{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;              /* separación vertical */
+  }
+
+  #listaNotas li{
+    margin: 0;              /* evita márgenes raros */
+  }
+
+  #listaNotas .btn{
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="brand">RADIO DJ 101.5</div>
-    <nav aria-label="Principal">
-      <ul>
-        <li><a href="index.html">INICIO</a></li>
-        <li><a href="index.html#programacion">PROGRAMACIÓN</a></li>
-        <li><a href="index.html#noticias">NOTICIAS</a></li>
-        <li><a href="index.html#contacto">CONTACTO</a></li>
-        <li><a href="cuenta.html" class="account-btn">CUENTA</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<div id="header"></div>
 
 <div class="account-wrap">
   <h1>Mi cuenta</h1>
@@ -65,7 +53,9 @@
     <button class="tab-btn" role="tab" aria-controls="panel-datos" aria-selected="true" id="tab-datos">Datos</button>
     <button class="tab-btn" role="tab" aria-controls="panel-programacion" aria-selected="false" id="tab-programacion" hidden>Programación</button>
     <button class="tab-btn" role="tab" aria-controls="panel-usuarios" aria-selected="false" id="tab-usuarios" hidden>Gestión de usuarios</button>
+    <button class="tab-btn" role="tab" aria-controls="panel-soporte" aria-selected="false" id="tab-soporte" hidden>Casos de soporte</button>
     <button class="tab-btn" role="tab" aria-controls="panel-notas" aria-selected="false" id="tab-notas" hidden>Notas</button>
+    <button class="tab-btn" role="tab" aria-controls="panel-metricas" aria-selected="false" id="tab-metricas" hidden>Métricas</button>
     <div class="text-center mt-4">
       <button id="btn-logout" class="btn btn-danger">
         <i class="bi bi-box-arrow-right"></i> Cerrar sesión
@@ -78,11 +68,6 @@
   <section class="panel active" id="panel-datos" role="tabpanel" aria-labelledby="tab-datos">
     <h2>Datos personales</h2>
     <div class="grid2">
-      <div class="field">
-        <label>Nombre a mostrar</label>
-        <input id="inpDisplayName" type="text" placeholder="Nombre y Apellido">
-        <button class="btn" id="btnSaveDisplayName">Guardar nombre</button>
-      </div>
       <div class="field">
         <label>Usuario (solo letras y números)</label>
         <input id="inpUsername" type="text" placeholder="usuarioamigable">
@@ -133,25 +118,36 @@
 
   <!-- Panel: Programación (solo Admin) -->
   <section class="panel" id="panel-programacion" role="tabpanel" aria-labelledby="tab-programacion">
-    <h2>Programación del día</h2>
-    <div class="grid2">
-      <div class="field">
-        <label>Fecha</label>
-        <input id="progDate" type="date">
-      </div>
-      <div class="field" style="align-self:end">
-        <div class="row-actions">
-          <button class="btn" id="btnLoadProg">Cargar</button>
-          <button class="btn" id="btnSaveProg">Guardar</button>
-        </div>
+  <h2>Programación del día</h2>
+  <div class="grid2">
+    <div class="field">
+      <label>Fecha</label>
+      <input id="progDate" type="date">
+    </div>
+    <div class="field" style="align-self:end">
+      <div class="row-actions">
+        <!-- btnLoadProg se elimina -->
+        <button class="btn" id="btnSaveProg">Guardar</button>
       </div>
     </div>
+  </div>
 
-    <div class="grid6" style="margin-top:12px; font-weight:800">
-      <div>Inicio</div><div>Fin</div><div>Programa</div><div>Conductor</div><div>Invitados</div><div>#</div>
-    </div>
-    <div id="progRows"></div>
-  </section>
+  <div class="table-responsive">
+    <table class="table" aria-label="Programación del día">
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Fin</th>
+          <th>Programa</th>
+          <th>Conductor</th>
+          <th>Invitados</th>
+          <th></th> <!-- acá va la X -->
+        </tr>
+      </thead>
+      <tbody id="progRows"></tbody>
+    </table>
+  </div>
+</section>
 
   <!-- Panel: Gestión de usuarios (solo Admin) -->
   <section class="panel" id="panel-usuarios" role="tabpanel" aria-labelledby="tab-usuarios">
@@ -180,12 +176,20 @@
       <button class="btn" id="btnResetUsers">Limpiar</button>
     </div>
 
-    <table class="table" aria-label="Usuarios registrados">
-      <thead>
-        <tr><th>Nombre</th><th>Email</th><th>Usuario</th><th>Rol</th><th>Registrado</th><th>Acciones</th></tr>
-      </thead>
-      <tbody id="usersTbody"></tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table" aria-label="Usuarios registrados">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Registrado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="usersTbody"></tbody>
+      </table>
+    </div>
   </section>
 
   <!-- Panel: Notas (solo Periodista) -->
@@ -198,6 +202,23 @@
       </div>
       <div>
         <h3>Editor</h3>
+        <div class="field">
+          <label>Categoría</label>
+          <select id="notaCategoria">
+            <option value="local">Local</option>
+            <option value="internacional">Internacional</option>
+            <option value="musica">Música</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Resumen (texto corto para la tarjeta)</label>
+          <textarea id="notaResumen" rows="3" placeholder="Este texto aparece en la tarjeta de index/noticias"></textarea>
+        </div>
+        <div class="field">
+          <label>Imagen (URL)</label>
+          <input id="notaImagenUrl" type="text" placeholder="https://... (si falla se verá 404.png)">
+        </div>
         <div class="field">
           <label>Título</label>
           <input id="notaTitulo" type="text" placeholder="Titular de la nota">
@@ -221,372 +242,89 @@
       </div>
     </div>
   </section>
+
+<!-- Panel: Casos de soporte (rol soporte/admin) -->
+<section class="panel" id="panel-soporte" role="tabpanel" aria-labelledby="tab-soporte">
+  <h2>Casos de soporte</h2>
+
+  <div class="field" style="margin-bottom:12px">
+    <label>Buscar (por usuario, email, ubicación o descripción)</label>
+    <input id="srchSoporte" type="text" placeholder="Ej: @juan, encabezado, 'no carga', home, etc.">
+  </div>
+
+  <div id="soporteLista" class="accordion-list" aria-live="polite"></div>
+</section>
+
+<!-- Panel: Métricas de chat (solo Admin) -->
+<section class="panel" id="panel-metricas" role="tabpanel" aria-labelledby="tab-metricas">
+  <h2>Métricas de chat</h2>
+  <p class="muted">
+    Descargá un resumen de mensajes y usuarios únicos en bloques de 30 minutos para un día determinado.
+  </p>
+
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="field">
+      <label>Fecha a analizar</label>
+      <input id="metricasDate" type="date">
+    </div>
+  </div>
+
+  <div class="grid2" style="gap:24px">
+    <div class="metric-block">
+      <h3>Mensajes</h3>
+      <p class="muted">Cantidad de mensajes por bloque de 30 minutos.</p>
+      <div class="row-actions" style="margin-top:8px">
+        <button class="btn" id="btnMetricasMsgXLSX">
+          <i class="bi bi-file-earmark-spreadsheet"></i> Descargar Excel
+        </button>
+        <button class="btn" id="btnMetricasMsgPDF">
+          <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="metric-block">
+      <h3>Usuarios únicos</h3>
+      <p class="muted">Cantidad de usuarios distintos que escribieron en cada bloque.</p>
+      <div class="row-actions" style="margin-top:8px">
+        <button class="btn" id="btnMetricasUsersXLSX">
+          <i class="bi bi-file-earmark-spreadsheet"></i> Descargar Excel
+        </button>
+        <button class="btn" id="btnMetricasUsersPDF">
+          <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 </div>
 
-<script type="module">
-  import { app, auth, db, observeAuth } from "./js/firebase.js"; // tu inicialización Firebase
-  import {
-    updateProfile, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider, deleteUser, getAuth, signOut
-  } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-  import {
-    doc, getDoc, setDoc, updateDoc, collection, addDoc, deleteDoc,
-    getDocs, query, where, orderBy, serverTimestamp, Timestamp, onSnapshot, limit
-  } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+<div id="footer"></div>
 
-  // ===== Utilidades =====
-  const $ = (sel)=>document.querySelector(sel);
-  const $$ = (sel)=>document.querySelectorAll(sel);
-  const todayStr = ()=> new Date().toISOString().slice(0,10);
-  const toTS = (d)=> Timestamp.fromDate(new Date(d+"T00:00:00"));
+<!-- SheetJS para Excel (XLSX) -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-  function toast(msg){ alert(msg); } // reemplazable por UI linda
+<!-- jsPDF para PDF -->
+<!-- jsPDF para PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  function setTabs(role){
-    // Mostrar/ocultar tabs según rol
-    const tProg = $("#tab-programacion");
-    const tUsers = $("#tab-usuarios");
-    const tNotas = $("#tab-notas");
-    tProg.hidden = tUsers.hidden = tNotas.hidden = true;
+<!-- Importación de componentes -->
 
-    if(role === "admin"){
-      tProg.hidden = false;
-      tUsers.hidden = false;
-    }
-    if(role === "periodista"){
-      tNotas.hidden = false;
-    }
-    // Espectador solo ve "Datos" (y botón eliminar cuenta)
-    $("#deleteBox").style.display = (role === "espectador") ? "block" : "none";
-  }
+<script type="module" src="js/componentes.js"></script>
 
-  function initTabs(){
-    $$(".tab-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        $$(".tab-btn").forEach(b=>b.setAttribute("aria-selected","false"));
-        btn.setAttribute("aria-selected","true");
-        const id = btn.getAttribute("aria-controls");
-        $$(".panel").forEach(p=>p.classList.remove("active"));
-        $("#"+id).classList.add("active");
-      });
-    });
-  }
 
-  // ===== Estado global =====
-  let currentUser = null;
-  let currentRole = "espectador"; // default
-  let currentNoteId = null;       // editor de notas
+<script type="module" src="js/panel-cuenta.js"></script>
 
-  observeAuth(async (user)=>{
-    if(!user){ window.location.href = "login.html"; return; }
-    currentUser = user;
-    $("#whoami").textContent = `${user.displayName || "Usuario"} · ${user.email}`;
+<!-- Gestión de notificaciones modular -->
 
-    // Garantizar doc de usuario con role
-    const uref = doc(db, "users", user.uid);
-    const usnap = await getDoc(uref);
-    if(!usnap.exists()){
-      await setDoc(uref,{
-        uid:user.uid, email:user.email, displayName:user.displayName || "Usuario",
-        username:(user.displayName || "usuario").toLowerCase().replace(/[^\w]+/g,"").slice(0,20),
-        role:"espectador",
-        createdAt: serverTimestamp()
-      });
-      currentRole = "espectador";
-    } else {
-      currentRole = usnap.data().role || "espectador";
-    }
+<script type="module" src="./js/notificaciones.js"></script>
 
-    // Pintar valores iniciales en "Datos"
-    $("#inpDisplayName").value = user.displayName || "";
-    $("#inpUsername").value = (usnap.data() && (usnap.data().username||"")) || "";
-
-    // Activar tabs según rol
-    setTabs(currentRole);
-    initTabs();
-
-    // Programación (admin)
-    if(currentRole === "admin"){
-      initProgramacion();
-      initGestionUsuarios();
-    }
-
-    // Notas (periodista)
-    if(currentRole === "periodista"){
-      initNotas();
-    }
-  });
-
-  // ====== DATOS (perfil) ======
-  $("#btnSaveDisplayName").addEventListener("click", async ()=>{
-    const name = $("#inpDisplayName").value.trim();
-    if(!name) return toast("Escribe un nombre");
-    await updateProfile(currentUser, { displayName:name });
-    await updateDoc(doc(db,"users",currentUser.uid), { displayName:name });
-    toast("Nombre actualizado");
-    $("#whoami").textContent = `${name} · ${currentUser.email}`;
-  });
-
-  $("#btnSaveUsername").addEventListener("click", async ()=>{
-    const username = $("#inpUsername").value.trim().toLowerCase().replace(/[^\w]+/g,"").slice(1,20) || null;
-    if(!username) return toast("Usuario inválido");
-    await updateDoc(doc(db,"users",currentUser.uid), { username });
-    toast("Usuario actualizado");
-  });
-
-  // Cambiar email (requiere reautenticación)
-  $("#btnChangeEmail").addEventListener("click", async ()=>{
-    const newEmail = $("#inpNewEmail").value.trim();
-    const pass = $("#inpCurrentPassForEmail").value;
-    if(!newEmail || !pass) return toast("Completá nuevo email y tu contraseña");
-    try{
-      const cred = EmailAuthProvider.credential(currentUser.email, pass);
-      await reauthenticateWithCredential(currentUser, cred);
-      await updateEmail(currentUser, newEmail);
-      await updateDoc(doc(db,"users",currentUser.uid), { email:newEmail });
-      toast("Email actualizado");
-    }catch(err){ toast(err.message || "No se pudo actualizar el email"); }
-  });
-
-  // Cambiar contraseña (requiere reautenticación)
-  $("#btnChangePass").addEventListener("click", async ()=>{
-    const oldp = $("#inpCurrentPass").value;
-    const newp = $("#inpNewPass").value;
-    if(!oldp || !newp) return toast("Completá ambas contraseñas");
-    try{
-      const cred = EmailAuthProvider.credential(currentUser.email, oldp);
-      await reauthenticateWithCredential(currentUser, cred);
-      await updatePassword(currentUser, newp);
-      toast("Contraseña actualizada");
-    }catch(err){ toast(err.message || "No se pudo actualizar la contraseña"); }
-  });
-
-  // Eliminar cuenta (solo espectador, por UI)
-  $("#btnDeleteAccount").addEventListener("click", async ()=>{
-    const pass = $("#inpDeletePass").value;
-    if(!pass) return toast("Confirmá tu contraseña");
-    if(!confirm("¿Seguro que querés eliminar tu cuenta?")) return;
-    try{
-      const cred = EmailAuthProvider.credential(currentUser.email, pass);
-      await reauthenticateWithCredential(currentUser, cred);
-      await deleteDoc(doc(db,"users",currentUser.uid));
-      await deleteUser(currentUser);
-      alert("Cuenta eliminada. ¡Hasta pronto!");
-      window.location.href = "index.html";
-    }catch(err){ toast(err.message || "No se pudo eliminar la cuenta"); }
-  });
-
-  // ====== PROGRAMACIÓN (admin) ======
-  function renderProgRows(data){
-    const cont = $("#progRows");
-    cont.innerHTML = "";
-    const blocks = data?.blocks || Array.from({length:6}).map(()=>({start:"", end:"", programa:"", conductor:"", invitados:""}));
-    blocks.forEach((b, i)=>{
-      const row = document.createElement("div");
-      row.className = "grid6";
-      row.innerHTML = `
-        <input type="time" value="${b.start||""}" data-k="start">
-        <input type="time" value="${b.end||""}" data-k="end">
-        <input type="text" value="${b.programa||""}" placeholder="Nombre del programa" data-k="programa">
-        <input type="text" value="${b.conductor||""}" placeholder="Conductor" data-k="conductor">
-        <input type="text" value="${b.invitados||""}" placeholder="Invitados" data-k="invitados">
-        <div style="display:grid;place-items:center;font-weight:800">${i+1}</div>
-      `;
-      cont.appendChild(row);
-    });
-  }
-
-  function initProgramacion(){
-    $("#progDate").value = todayStr();
-
-    $("#btnLoadProg").addEventListener("click", async ()=>{
-      const d = $("#progDate").value || todayStr();
-      const ref = doc(db,"programacion", d);
-      const snap = await getDoc(ref);
-      renderProgRows(snap.exists()? snap.data() : null);
-      toast("Programación cargada");
-    });
-
-    $("#btnSaveProg").addEventListener("click", async ()=>{
-      const d = $("#progDate").value || todayStr();
-      const rows = Array.from($("#progRows").children);
-      const blocks = rows.map(r=>{
-        const g = (k)=>r.querySelector(`[data-k="${k}"]`).value.trim();
-        return { start:g("start"), end:g("end"), programa:g("programa"), conductor:g("conductor"), invitados:g("invitados") };
-      });
-      if(blocks.length !== 6) return toast("Deben ser 6 bloques");
-      await setDoc(doc(db,"programacion", d), { blocks, updatedAt: serverTimestamp(), updatedBy: currentUser.uid });
-      toast("Programación guardada");
-    });
-
-    // Cargar hoy por defecto
-    $("#btnLoadProg").click();
-  }
-
-  // ====== GESTIÓN DE USUARIOS (admin) ======
-  function formatDate(ts){
-    try{
-      const dt = ts?.toDate ? ts.toDate() : new Date(ts);
-      return dt.toLocaleDateString();
-    }catch{ return ""; }
-  }
-
-  async function loadUsers(){
-    const role = $("#fltRole").value;
-    const from = $("#fltFrom").value;
-    const to = $("#fltTo").value;
-
-    let qref = collection(db,"users");
-    const clauses = [];
-    if(role) clauses.push(where("role","==",role));
-    if(from) clauses.push(where("createdAt",">=", toTS(from)));
-    if(to)   clauses.push(where("createdAt","<=", Timestamp.fromDate(new Date(to+"T23:59:59"))));
-
-    if(clauses.length){
-      // construir query con clausulas (puede requerir index)
-      // @ts-ignore
-      qref = query(qref, ...clauses, orderBy("createdAt","desc"));
-    }else{
-      // @ts-ignore
-      qref = query(qref, orderBy("createdAt","desc"), limit(100));
-    }
-
-    const snap = await getDocs(qref);
-    const tbody = $("#usersTbody");
-    tbody.innerHTML = "";
-    snap.forEach(docu=>{
-      const u = docu.data();
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${u.displayName || ""}</td>
-        <td>${u.email || ""}</td>
-        <td>${u.username || ""}</td>
-        <td>
-          <select data-uid="${u.uid}" class="selRole">
-            <option value="admin" ${u.role==="admin"?"selected":""}>admin</option>
-            <option value="periodista" ${u.role==="periodista"?"selected":""}>periodista</option>
-            <option value="espectador" ${u.role==="espectador"?"selected":""}>espectador</option>
-          </select>
-        </td>
-        <td>${formatDate(u.createdAt)}</td>
-        <td><button class="btn btnSmall" data-act="saveRole" data-uid="${u.uid}">Guardar rol</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-
-    // Guardar cambios de rol
-    tbody.querySelectorAll('button[data-act="saveRole"]').forEach(btn=>{
-      btn.addEventListener("click", async ()=>{
-        const uid = btn.getAttribute("data-uid");
-        const sel = tbody.querySelector(`select[data-uid="${uid}"]`);
-        const newRole = sel.value;
-        try{
-          await updateDoc(doc(db,"users", uid), { role:newRole });
-          toast("Rol actualizado");
-        }catch(err){
-          toast(err.message || "No se pudo actualizar el rol (verifica reglas y config/admins)");
-        }
-      });
-    });
-  }
-
-  function initGestionUsuarios(){
-    $("#btnApplyUsers").addEventListener("click", loadUsers);
-    $("#btnResetUsers").addEventListener("click", ()=>{
-      $("#fltRole").value="";
-      $("#fltFrom").value="";
-      $("#fltTo").value="";
-      loadUsers();
-    });
-    loadUsers();
-  }
-
-  // ====== NOTAS (periodista) ======
-  async function refreshNotasList(){
-    const lis = $("#listaNotas");
-    lis.innerHTML = "";
-    const qref = query(collection(db,"notas"), where("autorUid","==", currentUser.uid), orderBy("updatedAt","desc"));
-    const snap = await getDocs(qref);
-    snap.forEach(d=>{
-      const n = d.data();
-      const li = document.createElement("li");
-      li.innerHTML = `<button class="btn" data-id="${d.id}">${n.titulo} · <span class="muted">${n.estado}</span></button>`;
-      lis.appendChild(li);
-    });
-    lis.querySelectorAll("button").forEach(b=>{
-      b.addEventListener("click", async ()=>{
-        const id = b.getAttribute("data-id");
-        const s = await getDoc(doc(db,"notas", id));
-        if(s.exists()){
-          const n = s.data();
-          currentNoteId = id;
-          $("#notaTitulo").value = n.titulo || "";
-          $("#notaCuerpo").value = n.cuerpo || "";
-          $("#notaEstado").value = n.estado || "borrador";
-        }
-      });
-    });
-  }
-
-  function initNotas(){
-    $("#btnNuevaNota").addEventListener("click", ()=>{
-      currentNoteId = null;
-      $("#notaTitulo").value = "";
-      $("#notaCuerpo").value = "";
-      $("#notaEstado").value = "borrador";
-    });
-
-    $("#btnGuardarNota").addEventListener("click", async ()=>{
-      const titulo = $("#notaTitulo").value.trim();
-      const cuerpo = $("#notaCuerpo").value.trim();
-      const estado = $("#notaEstado").value;
-      if(!titulo) return toast("Agrega un título");
-
-      if(currentNoteId){
-        await updateDoc(doc(db,"notas", currentNoteId), {
-          titulo, cuerpo, estado, updatedAt: serverTimestamp()
-        });
-      }else{
-        const ref = await addDoc(collection(db,"notas"), {
-          titulo, cuerpo, estado,
-          autorUid: currentUser.uid,
-          autorNombre: currentUser.displayName || "Periodista",
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp()
-        });
-        currentNoteId = ref.id;
-      }
-      toast("Nota guardada");
-      refreshNotasList();
-    });
-
-    $("#btnBorrarNota").addEventListener("click", async ()=>{
-      if(!currentNoteId) return toast("Seleccioná una nota");
-      if(!confirm("¿Borrar esta nota?")) return;
-      await deleteDoc(doc(db,"notas", currentNoteId));
-      currentNoteId = null;
-      $("#notaTitulo").value = "";
-      $("#notaCuerpo").value = "";
-      $("#notaEstado").value = "borrador";
-      toast("Nota borrada");
-      refreshNotasList();
-    });
-
-    refreshNotasList();
-  }
-
-  document.getElementById("btn-logout").addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      // Redirigir al login o home
-      window.location.href = "login.html";
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-      alert("No se pudo cerrar sesión. Inténtalo de nuevo.");
-    }
-  });
-</script>
 
 <!-- Firebase core (ya lo tenés) -->
+
 <script type="module" src="js/firebase.js"></script>
 
 </body>

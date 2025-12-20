@@ -105,7 +105,6 @@ function markDotsForMonth(){
     }
   });
 }
-
 /** Prefetch del mes: usa rango de documentId */
 async function prefetchMonth(y,m){
   cacheMonth.clear();
