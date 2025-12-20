@@ -109,9 +109,6 @@ export function renderCardNoticias(n){
         <h3>${titulo}</h3>
         <p>${resumen}</p>
         <span class="read-more" data-act="leer" data-id="${esc(n.id)}">Leer Más</span>
-        <div class="comments">
-          <b>Comentarios (0)</b>
-        </div>
       </div>
     </article>
   `;

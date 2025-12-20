@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RADIO DJ 101.5 - Programación</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="footer.css">
@@ -119,6 +120,22 @@
   .buttons{ flex-wrap: wrap; gap: 10px; }
   .btn{ flex: 1 1 100%; width: 100%; }
 }
+.program-image{
+  background:#F8F7F5;
+  border-radius:var(--radius);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:160px;
+  overflow:hidden;
+}
+
+.program-image img{
+  width:130%;
+  height:130%;
+  object-fit:contain;        /* 🔑 mantiene proporción */
+  display:block;
+}
 
   </style>
 </head>
@@ -126,20 +143,14 @@
   <div id="header"></div>
 
   <div class="frame">
-    <aside class="side-banner left"><span>PUBLICIDAD</span></aside>
-    <aside class="side-banner right"><span>PUBLICIDAD</span></aside>
 
     <section class="program-card">
       <div class="program-header">PROGRAMACIÓN SEMANAL</div>
       <div class="program-body">
         <div class="program-image" aria-hidden="true">
-          <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="120" height="80" rx="10" fill="#cfd6df"/>
-            <circle cx="40" cy="40" r="18" fill="#b8c1cc"/>
-            <rect x="68" y="24" width="36" height="12" rx="4" fill="#b8c1cc"/>
-            <rect x="68" y="44" width="28" height="10" rx="3" fill="#b8c1cc"/>
-          </svg>
+          <img src="img/logodj.jpeg" alt="">
         </div>
+        
         <div>
           <div class="program-table">
             <table>
@@ -156,8 +167,7 @@
             </table>
           </div>
           <div class="buttons">
-            <button class="btn primary">Descargar Horario</button>
-            <button class="btn secondary">Escuchar En Vivo</button>
+            <a href="index.html" class="btn secondary">Escuchar En Vivo</a>
           </div>
         </div>
       </div>
@@ -168,6 +178,10 @@
 
 <script type="module" src="js/componentes.js"></script>
 
+
+<!-- Notificaciones -->
+
+<script type="module" src="./js/notificaciones.js"></script>
 
 <script type="module" src="js/programacion-publica.js"></script>
 
